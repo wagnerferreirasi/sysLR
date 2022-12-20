@@ -37,6 +37,7 @@
                                         <th>Destino</th>
                                         <th>Valor</th>
                                         <th>Criado por</th>
+                                        <th>Criado em</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -50,6 +51,7 @@
                                             {{ $package->detail->value }}
                                         </td>
                                         <td>{{ $package->user->name }}</td>
+                                        <td>{{ $package->created_at->format('d/m/Y') }}</td>
                                         <td>
                                             <a href="" class="btn btn-sm btn-outline-dark m-0" title="Vizualizar">
                                                 <i class="fas fa-eye"></i>

@@ -37,15 +37,18 @@
                                         <td>{{ $destiny->city }}</td>
                                         <td class="text-center">{{ $destiny->state }}</td>
                                         <td class="text-center">
-                                            <a href="" class="btn btn-sm btn-outline-dark m-0" title="Vizualizar">
+                                            <button type="button" class="btn btn-sm btn-outline-dark m-0" title="Visualizar" wire:click="show({{ $destiny->id }})">
                                                 <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="" class="btn btn-sm btn-outline-warning m-0" title="Editar">
+                                            </button>
+
+                                            <a href="{{ route('dashboard.destinies.edit', ['id' => $destiny->id]) }}" class="btn btn-sm btn-outline-warning m-0" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button type="button" class="btn btn-outline-danger btn-sm m-0" title="Deletar">
+
+                                            <button type="button" class="btn btn-sm btn-outline-danger m-0" title="Deletar" wire:click="modalDelete({{ $destiny->id }})">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -60,9 +63,34 @@
             </div>
         </div>
     </div>
+    <x-modal-component />
 </div>
+
 @section('scripts')
     <script>
+        document.addEventListener('showModal', event => {
+            $('#showModal').modal('show')
+            $('#showModalLabel').html('Destino: <span class="fw-bold">' + event.detail.destinyShow.name + '</span>');
+            $('#showModalBody').html('<div class="row"><div class="col-12"><p class="fw-bold">Endereço: <span class="fw-normal">' + event.detail.destinyShow.address + '</span></p></div><div class="col-12"><p class="fw-bold">Cidade: <span class="fw-normal">' + event.detail.destinyShow.city + '</span></p></div><div class="col-12"><p class="fw-bold">UF: <span class="fw-normal">' + event.detail.destinyShow.state + '</span></p></div></div>');
+
+            $('#showModalButtons').html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>')
+        });
+
+        document.addEventListener('modalDelete', event => {
+            //abre o modal
+            $('#showModal').modal('show')
+            $('#showModalLabel').html('Deletar destino: <span class="fw-bold">' + event.detail.destinyDelete.name + '</span>');
+            $('#showModalBody').html('<div class="text-center col-12"><span class="fw-bold">Atenção!</span><p class="fw-bold">Tem certeza que deseja deletar este destino?</p><p class="fw-bold text-danger">Esta ação não poderá ser desfeita!</p></div><hr><div class="row"><div class="col-12"><p class="fw-bold">Endereço: <span class="fw-normal">' + event.detail.destinyDelete.address + '</span></p></div><div class="col-12"><p class="fw-bold">Cidade: <span class="fw-normal">' + event.detail.destinyDelete.city + '</span></p></div><div class="col-12"><p class="fw-bold">UF: <span class="fw-normal">' + event.detail.destinyDelete.state + '</span></p></div></div>');
+
+            $('#showModalButtons').html('<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button><button type="button" class="btn btn-danger" onclick="Livewire.emit(\'delete\', ' + event.detail.destinyDelete.id + ')">Deletar</button>')
+        });
+
+        document.addEventListener('hideModal', event => {
+            //fecha o modal
+            $('#showModal').modal('hide');
+            $('#deleteModal').modal('hide');
+        });
+
         $(document).ready(function() {
             $('#tableDestiny').DataTable({
                 drawCallback: function () {

@@ -74,6 +74,7 @@ class NewPlaceComponent extends Component
 
             $this->reset();
             $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Local cadastrado com sucesso!']);
+            return redirect()->route('dashboard.places');
 
         }
         catch (\Exception $e) {
@@ -81,6 +82,7 @@ class NewPlaceComponent extends Component
                 'type' => 'error',
                 'message' => 'Erro ao cadastrar a Loja: ' . $e->getMessage()
             ]);
+            return redirect()->route('dashboard.places');
         }
     }
 

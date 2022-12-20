@@ -18,6 +18,7 @@ use App\Http\Livewire\Dashboard\Client\NewClientComponent;
 use App\Http\Livewire\Dashboard\Client\EditClientComponent;
 use App\Http\Livewire\Dashboard\Destiny\NewDestinyComponent;
 use App\Http\Livewire\Dashboard\Package\NewPackageComponent;
+use App\Http\Livewire\Dashboard\Destiny\EditDestinyComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,7 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::group(['prefix' => 'destinies'], function () {
         Route::get('/', DestinyComponent::class)->middleware('auth')->name('dashboard.destinies');
         Route::get('/add', NewDestinyComponent::class)->middleware('auth')->name('dashboard.destinies.add');
+        Route::get('/edit/{id}', EditDestinyComponent::class)->middleware('auth')->name('dashboard.destinies.edit');
     });
 
     //Routes routes

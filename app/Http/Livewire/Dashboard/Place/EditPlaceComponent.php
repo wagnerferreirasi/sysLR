@@ -87,11 +87,13 @@ class EditPlaceComponent extends Component
                 'type' => 'success',
                 'message' => 'Loja atualizado com sucesso!'
             ]);
+            return redirect()->route('dashboard.places');
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('alert', [
                 'type' => 'error',
                 'message' => 'Erro ao atualizar loja!'
             ]);
+            return redirect()->route('dashboard.places');
         }
     }
     public function render()
