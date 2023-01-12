@@ -16,7 +16,7 @@ class Sender extends Model
         'email',
     ];
 
-    public function packages()
+    public function package()
     {
         return $this->hasMany(Package::class);
     }

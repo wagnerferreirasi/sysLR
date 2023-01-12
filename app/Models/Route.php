@@ -35,12 +35,12 @@ class Route extends Model
 
     public function getDestinyNameAttribute()
     {
-        return $this->destiny->name;
+        return $this->destiny->name ?? '';
     }
 
     public function getPlaceNameAttribute()
     {
-        return $this->place->name;
+        return $this->place->name ?? '';
     }
 
     public function getPrice1Attribute($value)

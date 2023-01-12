@@ -53,9 +53,9 @@
                                         <td>{{ $package->user->name }}</td>
                                         <td>{{ $package->created_at->format('d/m/Y') }}</td>
                                         <td>
-                                            <a href="" class="btn btn-sm btn-outline-dark m-0" title="Vizualizar">
+                                            <button type="button" class="btn btn-sm btn-outline-dark m-0" title="Visualizar" wire:click="show({{ $package->id }})">
                                                 <i class="fas fa-eye"></i>
-                                            </a>
+                                            </button>
                                             <a href="" class="btn btn-sm btn-outline-warning m-0" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
@@ -76,6 +76,7 @@
             </div>
         </div>
     </div>
+    <x-modal-component />
 </div>
 @section('scripts')
     <script>
@@ -100,6 +101,11 @@
                     }
                 }
             });
+        });
+
+        window.addEventListener('showModal', event => {
+            console.log(event);
+
         });
     </script>
 @endsection

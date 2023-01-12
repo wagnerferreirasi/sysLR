@@ -25,7 +25,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Remetente</label>
-                                        <input type="text" class="form-control" name="name" wire:model.lazy="name">
+                                        <input type="text" class="form-control" name="name" wire:model.defer="name">
                                         @error('name')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
@@ -35,21 +35,21 @@
                                     <div class="form-group">
                                         <label class="bmd-label-floating">CPF</label>
                                         <input type="text" class="form-control" name="document"
-                                            wire:model.lazy="document">
+                                            wire:model.defer="document">
                                         @error('document')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Celular</label>
-                                        <input type="text" class="form-control" name="phone" wire:model.lazy="phone">
+                                        <input type="text" class="form-control" name="phone" wire:model.defer="phone">
                                         @error('phone')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Email</label>
-                                        <input type="text" class="form-control" name="email" wire:model.lazy="email">
+                                        <input type="text" class="form-control" name="email" wire:model.defer="email">
                                         @error('email')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                 <div class="col-md-6">
 
                                         <label class="bmd-label-floating">Local de destino</label>
-                                        <select class="form-select" wire:model.lazy="destiny" required>
+                                        <select class="form-select" wire:model.defer="destiny" required>
                                             <option value="" selected>Selecione um ponto de entrega</option>
                                             @foreach($destinies as $destiny)
                                             <option value="{{ $destiny->id }}">{{ $destiny->name }}</option>
@@ -71,7 +71,7 @@
                                 <div class="col-md-6">
 
                                         <label class="bmd-label-floating">Destinatario/Cliente</label>
-                                        <select class="form-select" wire:model.lazy="client" required>
+                                        <select class="form-select" wire:model.defer="client" required>
                                             <option value="" selected>Selecione um cliente</option>
                                             @foreach($clients as $client)
                                             <option class="fw-bold" value="{{ $client->id }}">{{ $client->name }}</option>
@@ -91,28 +91,28 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Comprimento</label>
-                                        <input type="text" class="form-control" name="length" wire:model.lazy="length">
+                                        <input type="text" class="form-control" wire:model.lazy="length">
                                         @error('length')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Largura</label>
-                                        <input type="text" class="form-control" name="width" wire:model.lazy="width">
+                                        <input type="text" class="form-control" wire:model.lazy="width">
                                         @error('width')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Altura</label>
-                                        <input type="text" class="form-control" name="height" wire:model.lazy="height">
+                                        <input type="text" class="form-control" wire:model.lazy="height">
                                         @error('height')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Peso</label>
-                                        <input type="text" class="form-control" name="weight" wire:model.lazy="weight">
+                                        <input type="text" class="form-control" wire:model.lazy="weight">
                                         @error('weight')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
@@ -121,13 +121,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Observação</label>
-                                        <textarea class="form-control" name=observation" wire:model.lazy="observation"
+                                        <textarea class="form-control" wire:model.defer="observation"
                                             rows="5"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="row d-grid px-2">
-                                <button type="button" class="btn btn-lg btn-outline-warning" wire:click="calculateValue()" data-bs-toggle="modal" data-bs-target="#modalValor">
+                                <button type="button" class="btn btn-lg btn-outline-warning" wire:click="loading()">
                                     <i class="fas fa-money-bill"></i>
                                     Ir para Pagamento
                                 </button>
@@ -139,7 +139,7 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="modalValor">Valor do frete</h5>
+                                            <h5 class="modal-title">Valor do frete: <span id="valorPacote"></span></h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
@@ -195,3 +195,19 @@
         </div>
     </div>
 </div>
+
+@section('scripts')
+    <script>
+        document.addEventListener('value', event => {
+            let value = event.detail.value.replace('.', ',');
+            $('#valorPacote').html('R$ ' + value);
+        });
+
+        document.addEventListener('openModal', event => {
+            // after 2 seconds, open modal
+            setTimeout(function() {
+                $('#modalValor').modal('show');
+            }, 4000);
+        });
+    </script>
+@endsection

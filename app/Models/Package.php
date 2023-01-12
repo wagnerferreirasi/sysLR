@@ -47,4 +47,9 @@ class Package extends Model
         return $this->detail->volume;
     }
 
+    public function sender()
+    {
+        return $this->hasOne(Sender::class);
+    }
+
 }

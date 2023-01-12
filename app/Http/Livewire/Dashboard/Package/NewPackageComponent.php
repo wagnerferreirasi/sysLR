@@ -53,6 +53,20 @@ class NewPackageComponent extends Component
         'height.number' => 'A altura deve ser um número',
     ];
 
+    protected $listeners = [
+        'loading' => 'loading',
+        'calculateValue' => 'calculateValue',
+    ];
+
+    public function loading()
+    {
+        $this->dispatchBrowserEvent('alert', ['type' => 'info',  'message' => 'Carregando valor e formas de pagamento...']);
+
+        // call calculateValue method
+        return $this->calculateValue();
+    }
+
+
     public function render()
     {
         $lrCode = "LR" . date('Ymd') . "_" . rand(000000, 999999);
@@ -143,6 +157,8 @@ class NewPackageComponent extends Component
 
     public function calculateValue()
     {
+
+
         $amount = DB::table('routes')->select('id', 'price1', 'price2', 'price3', 'tax')->where([
             ['place_id', session()->get('place_id')],
             ['destiny_id', $this->destiny]
@@ -163,7 +179,8 @@ class NewPackageComponent extends Component
                 $this->value = $additional + $this->value;
             }
         }
-
+        $this->dispatchBrowserEvent('value', ['value' => $this->value]);
+        $this->dispatchBrowserEvent('openModal');
         return $this->value;
     }
 

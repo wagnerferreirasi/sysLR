@@ -46,7 +46,7 @@
                 text: event.detail.message,
                 icon: event.detail.type,
                 showConfirmButton: false,
-                timer: 4000,
+                timer: event.detail.timer ?? 4000,
                 timerProgressBar: true,
             })
         })

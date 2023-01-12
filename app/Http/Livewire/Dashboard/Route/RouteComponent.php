@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Dashboard\Route;
 
+use App\Libs\ExceptionsLib;
 use App\Models\Route;
 use App\Models\Package;
 use Livewire\Component;
@@ -27,17 +28,16 @@ class RouteComponent extends Component
     public function delete($id)
     {
         $route = Route::find($id);
-
         $package = Package::where('destiny_id', $route->destiny_id)
                     ->where('place_id', $route->place_id)
                     ->first();
 
-        if($package){
-            $this->dispatchBrowserEvent('alert', ['type' => 'error',  'message' => 'Esta rota está sendo usada em um pacote, não é possível excluí-la!']);
-        }else{
+        if(!$package){
             $route->delete();
-            $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Rota excluída com sucesso!']);
+            $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => ExceptionsLib::routeExcluded()->getMessage()]);
             return redirect()->route('dashboard.routes');
         }
+
+        $this->dispatchBrowserEvent('alert', ['type' => 'error',  'message' => ExceptionsLib::routeInUse()->getMessage()]);
     }
 }
