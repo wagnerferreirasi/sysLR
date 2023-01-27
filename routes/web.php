@@ -19,6 +19,7 @@ use App\Http\Livewire\Dashboard\Client\EditClientComponent;
 use App\Http\Livewire\Dashboard\Destiny\NewDestinyComponent;
 use App\Http\Livewire\Dashboard\Package\NewPackageComponent;
 use App\Http\Livewire\Dashboard\Destiny\EditDestinyComponent;
+use App\Http\Livewire\Dashboard\Package\EditPackageComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,9 +75,15 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::group(['prefix' => 'packages'], function () {
         Route::get('/', PackageComponent::class)->middleware('auth')->name('dashboard.packages');
         Route::get('/add', NewPackageComponent::class)->middleware('auth')->name('dashboard.packages.add');
+        Route::get('/edit/{id}', EditPackageComponent::class)->middleware('auth')->name('dashboard.packages.edit');
+        Route::get('/print/{id}', PackageComponent::class)->middleware('auth')->name('dashboard.packages.print');
     });
 
 });
+
+Route::get('/print', function () {
+    return view('print');
+})->name('print');
 
 //logout
 Route::get('/logout', function () {

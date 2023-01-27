@@ -22,5 +22,6 @@ class Client extends Model
         'city',
         'state',
         'zip_code',
+        'type'
     ];
 }

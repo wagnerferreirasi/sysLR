@@ -9,9 +9,13 @@ use Livewire\Component;
 
 class ClientComponent extends Component
 {
+    public $clients;
+
     public function mount()
     {
-        $this->clients = Client::all();
+        $this->clients = cache()->rememberForever('clients', function () {
+            return Client::all();
+        });
     }
 
     public function exportData()
@@ -51,6 +55,11 @@ class ClientComponent extends Component
         }
     }
 
+    public function show($id)
+    {
+        $client = Client::find($id);
+        $this->dispatchBrowserEvent('showModal', ['client' => $client]);
+    }
 
     public function render()
     {

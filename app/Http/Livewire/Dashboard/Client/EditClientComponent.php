@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class EditClientComponent extends Component
 {
+    public $type;
     public $name;
     public $rg;
     public $cpfcnpj;
@@ -24,6 +25,7 @@ class EditClientComponent extends Component
     public function mount($id)
     {
         $client = Client::find($id);
+        $this->type = $client->type;
         $this->name = $client->name;
         $this->rg = $client->rg;
         $this->cpfcnpj = $client->cpfcnpj;
@@ -47,6 +49,7 @@ class EditClientComponent extends Component
     public function update()
     {
         $this->validate([
+            'type' => 'required',
             'name' => 'required|min:3',
             'rg' => 'min:7',
             'cpfcnpj' => 'required|numeric|unique:clients,cpfcnpj,'.$this->client_id,
@@ -59,6 +62,7 @@ class EditClientComponent extends Component
             'city' => 'required',
             'state' => 'required',
         ],[
+            'type.required' => 'O campo tipo é obrigatório',
             'name.required' => 'O campo nome é obrigatório',
             'name.min' => 'O campo nome deve ter no mínimo 3 caracteres',
             'rg.min' => 'O campo RG deve ter no mínimo 7 caracteres',
@@ -82,6 +86,7 @@ class EditClientComponent extends Component
 
         try {
             $client = Client::find($this->client_id);
+            $client->type = $this->type;
             $client->name = $this->name;
             $client->rg = $this->rg;
             $client->cpfcnpj = $this->cpfcnpj;
@@ -98,13 +103,13 @@ class EditClientComponent extends Component
 
             if ($client) {
                 $this->reset();
-                $this->dispatchBrowserEvent('alert', ['type' => 'success', 'message' => 'Cliente cadastrado com sucesso!']);
+                $this->dispatchBrowserEvent('alert', ['type' => 'success', 'message' => 'Cliente atualizado com sucesso!']);
 
                 return redirect()->route('dashboard.clients');
             }
 
         } catch (\Exception $e) {
-            $this->dispatchBrowserEvent('alert', ['type' => 'error', 'message' => 'Erro ao cadastrar cliente! ' .$e->getMessage()]);
+            $this->dispatchBrowserEvent('alert', ['type' => 'error', 'message' => 'Erro ao atualizar cliente! ' .$e->getMessage()]);
         }
     }
 

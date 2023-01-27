@@ -35,6 +35,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Tipo</th>
                                             <th>Nome</th>
                                             <th>Cpf/Cnpj</th>
                                             <th>E-Mail</th>
@@ -45,6 +46,7 @@
                                         @foreach($clients as $client)
                                         <tr>
                                             <td>{{ $client->id }}</td>
+                                            <td>{{ $client->type == 'Client' ? 'Cliente' : 'Fornecedor' }}</td>
                                             <td>{{ $client->name }}</td>
                                             <td class="cpf_cnpj">{!! $client->cpfcnpj !!}</td>
                                             <td>{{ $client->email }}</td>
@@ -115,7 +117,7 @@ $(document).ready(function() {
         responsive: true,
         columnDefs: [{
             orderable: false,
-            targets: [4]
+            targets: [5]
         }],
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por página",

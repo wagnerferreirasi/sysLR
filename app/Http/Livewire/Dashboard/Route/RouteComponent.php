@@ -14,9 +14,13 @@ class RouteComponent extends Component
     public function mount()
     {
         if(Auth::user()->utype == 'admin' || Auth::user()->utype == 'master'){
-            $this->routes = Route::all();
+            $this->routes = cache()->rememberForever('routes', function () {
+                return Route::all();
+            });
         }else{
-            $this->routes = Route::where('place_id', session()->get('place_id'))->get();
+            $this->routes = cache()->rememberForever('routes', function () {
+                return Route::where('user_id', Auth::user()->id)->get();
+            });
         }
     }
 

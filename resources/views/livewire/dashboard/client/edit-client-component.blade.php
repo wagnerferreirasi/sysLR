@@ -21,6 +21,19 @@
                     <div class="card-body">
                         <form wire:submit.prevent="update">
                             <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group mb-3">
+                                        <label for="type">Tipo</label>
+                                        <select class="form-select" id="type" wire:model.defer="type">
+                                            <option>Selecione</option>
+                                            <option value="Client">Cliente</option>
+                                            <option value="Company">Fornecedor</option>
+                                        </select>
+                                        @error('type') <span class="text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="cpfcnpj">CPF/CNPJ</label>

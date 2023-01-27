@@ -1,4 +1,9 @@
 @section('title', 'Novo Pacotes')
+@section('styles')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+@endsection
+
 <div>
     <div class="container-fluid">
         <div class="row">
@@ -20,65 +25,41 @@
                     </div>
                     <div class="card-body">
                         <form wire:submit.prevent="store">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-12">
+                            <div class="row" wire:ignore>
+                                <div class="col-md-12" >
                                     <div class="form-group">
-                                        <label class="bmd-label-floating">Remetente</label>
-                                        <input type="text" class="form-control" name="name" wire:model.defer="name">
-                                        @error('name')<span class="text-danger">{{ $message }}</span>@enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">CPF</label>
-                                        <input type="text" class="form-control" name="document"
-                                            wire:model.defer="document">
-                                        @error('document')<span class="text-danger">{{ $message }}</span>@enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">Celular</label>
-                                        <input type="text" class="form-control" name="phone" wire:model.defer="phone">
-                                        @error('phone')<span class="text-danger">{{ $message }}</span>@enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="bmd-label-floating">Email</label>
-                                        <input type="text" class="form-control" name="email" wire:model.defer="email">
-                                        @error('email')<span class="text-danger">{{ $message }}</span>@enderror
+                                    <label class="bmd-label-floating">Remetente/Fornecedor</label>
+                                        <select class="form-select" wire:model="sender" id="selectSenders" required>
+                                            <option value="" selected>Selecione um Remetente/Fornecedor</option>
+                                            @foreach($senders as $sender)
+                                            <option value="{{ $sender->id }}">{{ $sender->cpfcnpj }} - {{ $sender->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('destiny')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                             </div>
                             <hr>
-                            <div class="row">
+                            <div class="row" wire:ignore>
                                 <div class="col-md-6">
-
                                         <label class="bmd-label-floating">Local de destino</label>
-                                        <select class="form-select" wire:model.defer="destiny" required>
+                                        <select class="form-select" wire:model="destiny" id="selectDestinies" required>
                                             <option value="" selected>Selecione um ponto de entrega</option>
                                             @foreach($destinies as $destiny)
                                             <option value="{{ $destiny->id }}">{{ $destiny->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('destiny')<span class="text-danger">{{ $message }}</span>@enderror
-
                                 </div>
                                 <div class="col-md-6">
-
-                                        <label class="bmd-label-floating">Destinatario/Cliente</label>
-                                        <select class="form-select" wire:model.defer="client" required>
+                                        <label class="bmd-label-floating">Destinatário/Cliente</label>
+                                        <select class="form-select" wire:model="client" id="selectClients" required>
                                             <option value="" selected>Selecione um cliente</option>
                                             @foreach($clients as $client)
-                                            <option class="fw-bold" value="{{ $client->id }}">{{ $client->name }}</option>
+                                            <option class="fw-bold" value="{{ $client->id }}">{{ $client->cpfcnpj }} - {{ $client->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('client')<span class="text-danger">{{ $message }}</span>@enderror
-
                                 </div>
                             </div>
 
@@ -121,7 +102,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Observação</label>
-                                        <textarea class="form-control" wire:model.defer="observation"
+                                        <textarea class="form-control" wire:model.lazy="observation"
                                             rows="5"></textarea>
                                     </div>
                                 </div>
@@ -149,7 +130,7 @@
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Valor</label>
                                                         <input type="text" class="form-control" name="value"
-                                                            wire:model="value">
+                                                            wire:model.lazy="value">
                                                         @error('value')<span
                                                             class="text-danger">{{ $message }}</span>@enderror
                                                     </div>
@@ -197,6 +178,7 @@
 </div>
 
 @section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         document.addEventListener('value', event => {
             let value = event.detail.value.replace('.', ',');
@@ -204,10 +186,78 @@
         });
 
         document.addEventListener('openModal', event => {
-            // after 2 seconds, open modal
             setTimeout(function() {
                 $('#modalValor').modal('show');
             }, 4000);
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#selectSenders').select2({
+                theme: "bootstrap4",
+                language: {
+                    noResults: function () {
+                        return "Nenhum resultado encontrado";
+                    },
+                    searching: function () {
+                        return "Buscando...";
+                    },
+                    inputTooShort: function () {
+                        return "Digite pelo menos 3 caracteres";
+                    },
+                    errorLoading: function () {
+                        return "A busca falhou";
+                    },
+                }
+            });
+            $('#selectSenders').on('change', function (e) {
+                var data = $('#selectSenders').select2("val");
+                @this.set('sender', data);
+            });
+
+            $('#selectDestinies').select2({
+                theme: "bootstrap4",
+                language: {
+                    noResults: function () {
+                        return "Nenhum resultado encontrado";
+                    },
+                    searching: function () {
+                        return "Buscando...";
+                    },
+                    inputTooShort: function () {
+                        return "Digite pelo menos 3 caracteres";
+                    },
+                    errorLoading: function () {
+                        return "A busca falhou";
+                    },
+                }
+            });
+            $('#selectDestinies').on('change', function (e) {
+                var data = $('#selectDestinies').select2("val");
+                @this.set('destiny', data);
+            });
+
+            $('#selectClients').select2({
+                theme: "bootstrap4",
+                language: {
+                    noResults: function () {
+                        return "Nenhum resultado encontrado";
+                    },
+                    searching: function () {
+                        return "Buscando...";
+                    },
+                    inputTooShort: function () {
+                        return "Digite pelo menos 3 caracteres";
+                    },
+                    errorLoading: function () {
+                        return "A busca falhou";
+                    },
+                }
+            });
+            $('#selectClients').on('change', function (e) {
+                var data = $('#selectClients').select2("val");
+                @this.set('client', data);
+            });
         });
     </script>
 @endsection

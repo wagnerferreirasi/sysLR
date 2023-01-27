@@ -25,17 +25,58 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"
+        type="text/css">
 
     <!-- Bootstrap icons -->
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
-    @yield('scriptsHeader')
-    @yield('styles')
+    <script src="{{ asset('assets/js/jquery.min.js') }}" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function() {
+        window.print();
+        document.close();
+    });
+    </script>
+    <style>
+    @page {
+        /* size: 58mm 300mm; */
+        margin: 0;
+    }
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        #printarea,
+        #printarea * {
+            visibility: visible;
+        }
+
+        #printarea {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    .page {
+        page-break-after: always;
+    }
+
+    .texto-maior {
+        font-size: 20pt;
+        font-weight: bold;
+    }
+    .text-center {
+        text-align: center;
+    }
+    </style>
     @livewireStyles
 </head>
 
@@ -137,44 +178,51 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }} text-dark">
+                                    <a href="{{ route('dashboard') }}"
+                                        class="nav-link {{ request()->is('dashboard') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-home nav-icon"></i>
                                         <p>Home</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.cashiers') }}" class="nav-link {{ request()->is('dashboard/cashiers') ? 'active' : '' }} text-dark">
+                                    <a href="{{ route('dashboard.cashiers') }}"
+                                        class="nav-link {{ request()->is('dashboard/cashiers') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-cash-register nav-icon"></i>
                                         <p>Abrir/Fechar Caixa</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.clients') }}" class="nav-link {{ request()->is('dashboard/clients') ? 'active' : '' }} text-dark">
+                                    <a href="{{ route('dashboard.clients') }}"
+                                        class="nav-link {{ request()->is('dashboard/clients') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-user-tie nav-icon"></i>
                                         <p>Clientes</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.packages') }}" class="nav-link {{ request()->is('dashboard/packages') ? 'active' : '' }} text-dark">
+                                    <a href="{{ route('dashboard.packages') }}"
+                                        class="nav-link {{ request()->is('dashboard/packages') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-box nav-icon"></i>
                                         <p>Pacotes</p>
                                     </a>
                                 </li>
                                 @if(Auth::user()->utype == 'admin' || Auth::user()->utype == 'master')
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.places') }}" class="nav-link {{ request()->is('dashboard/places') ? 'active' : '' }} text-dark">
+                                    <a href="{{ route('dashboard.places') }}"
+                                        class="nav-link {{ request()->is('dashboard/places') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-store nav-icon"></i>
                                         <p>Lojas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.destinies') }}" class="nav-link {{ request()->is('dashboard/destinies') ? 'active' : '' }} text-dark">
+                                    <a href="{{ route('dashboard.destinies') }}"
+                                        class="nav-link {{ request()->is('dashboard/destinies') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-map-marked-alt nav-icon"></i>
                                         <p>Destinos</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.routes') }}" class="nav-link {{ request()->is('dashboard/routes') ? 'active' : '' }} text-dark">
+                                    <a href="{{ route('dashboard.routes') }}"
+                                        class="nav-link {{ request()->is('dashboard/routes') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-route nav-icon"></i>
                                         <p>Rotas</p>
                                     </a>
@@ -241,7 +289,104 @@
 
             <!-- Main content -->
             <div class="content">
-                {{ $slot }}
+                <div class="receipt" id="printarea" onload="print()">
+                    <div class="py-12">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                <div class="row">
+                                    <div class="col-sm-12 px-5 py-4">
+                                        <h3>Comprovante</h3>
+                                    </div>
+                                    <div class="col-sm-12 px-5">
+                                        <span class="badge badge-pill badge-warning">
+                                            <h6 class="mb-0">
+                                                <strong>LRCODE:</strong> {{ session()->get('package')->code }}
+                                            </h6>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-12 px-5">
+                                        <div id="printable">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col">
+                                                    <hr>
+                                                    <p>LR TUR TRANSLOG</p>
+                                                    <p class="small my-0">CNPJ: </p>
+                                                    <p class="small my-0">LOJA: </p>
+                                                    <p class="small my-0">
+                                                        ENDEREÇO: <br />
+                                                        <br />
+                                                        CEP:
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col">
+                                                    <hr>
+                                                    <p class="my-2">COMPROVANTE DO CLIENTE</p>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col">
+                                                    <p class="text-left my-0">MOVIMENTO: <br />
+                                                    <h3></h3>
+                                                    </p>
+                                                    <p class="my-0">OPERADOR(A): </p>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col">
+                                                    <table class="table table-borderless">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">ITEM</th>
+                                                                <th scope="col">VALOR</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>Pac </th>
+                                                                <td>R$ {{session()->get('package')->value}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <p class="my-0">VALOR DO PACOTE: R$
+                                                        {{session()->get('package')->value}}
+                                                    </p>
+                                                    <p class="my-0">DESTINO: {{ session()->get('package')->destiny ?? '' }}</p>
+                                                    <p class="my-0">MEDIDAS(CxLxA):</p>
+                                                    <p class="my-0 texto-maior">RASTREADOR:</p>
+                                                    <p class="my-0 texto-maior">
+                                                        {{ session()->get('package')->code }}
+                                                    </p>
+                                                    <p class="my-0 display-4"></p>
+                                                    <p class="lead my-0 font-weight-bold"></p>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="d-flex">
+                                                    QRCODE
+                                                    <hr>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="my-0 display-5">{{ session()->get('package')->code }}</p>
+                                                    <p class="my-0 display-4"></p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="page"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.content -->
 
@@ -273,7 +418,7 @@
 
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}" crossorigin="anonymous"></script>
+
     <!-- font awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"
         integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w=="
@@ -304,17 +449,19 @@
     @yield('scripts')
 
     <script>
-        document.addEventListener('alert', event => {
-            Swal.fire({
-                title: event.detail.title,
-                text: event.detail.message,
-                icon: event.detail.type,
-                showConfirmButton: false,
-                timer: event.detail.timer ?? 4000,
-                timerProgressBar: true,
-            })
+    document.addEventListener('alert', event => {
+        Swal.fire({
+            title: event.detail.title,
+            text: event.detail.message,
+            icon: event.detail.type,
+            showConfirmButton: false,
+            timer: event.detail.timer ?? 4000,
+            timerProgressBar: true,
         })
+    })
     </script>
 </body>
+
+</html>
 
 </html>

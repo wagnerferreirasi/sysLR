@@ -14,6 +14,7 @@ class NewPackageComponent extends Component
     public $phone;
     public $email;
     public $client;
+    public $sender;
     public $destiny;
     public $weight;
     public $width;
@@ -71,14 +72,23 @@ class NewPackageComponent extends Component
     {
         $lrCode = "LR" . date('Ymd') . "_" . rand(000000, 999999);
         $this->lrCode = $lrCode;
-        $clients = Client::all();
-        $destinies = DB::table('routes')
-            ->join('destinies', 'routes.destiny_id', '=', 'destinies.id')
-            ->select('destinies.*')
-            ->where('routes.place_id', session()->get('place_id'))
-            ->where('routes.status', 1)
-            ->get();
-        return view('livewire.dashboard.package.new-package-component', compact('lrCode', 'clients', 'destinies'));
+        $clients = cache()->rememberForever('clients', function () {
+            return Client::where('type', 'client')->get();
+        });
+
+        $senders = cache()->rememberForever('senders', function () {
+            return Client::where('type', 'company')->get();
+        });
+
+        $destinies = cache()->rememberForever('destinies', function () {
+            return DB::table('routes')
+                ->join('destinies', 'routes.destiny_id', '=', 'destinies.id')
+                ->select('destinies.*')
+                ->where('routes.place_id', session()->get('place_id'))
+                ->where('routes.status', 1)
+                ->get();
+        });
+        return view('livewire.dashboard.package.new-package-component', compact('lrCode', 'clients', 'destinies', 'senders'));
     }
 
     public function store()
@@ -87,26 +97,10 @@ class NewPackageComponent extends Component
 
         DB::beginTransaction();
         try {
-            $sender = DB::table('senders')
-                ->where('document', $this->document)
-                ->first();
-            if ($sender) {
-                $sender_id = $sender->id;
-            } else {
-                $sender_id = DB::table('senders')->insertGetId([
-                    'name' => $this->name,
-                    'document' => $this->document,
-                    'phone' => $this->phone,
-                    'email' => $this->email,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
-
             $package = DB::table('packages')->insertGetId([
                 'code' => $this->lrCode,
                 'user_id' => auth()->user()->id,
-                'sender_id' => $sender_id,
+                'sender_id' => $this->sender,
                 'client_id' => $this->client,
                 'place_id' => session()->get('place_id'),
                 'destiny_id' => $this->destiny,
@@ -131,6 +125,7 @@ class NewPackageComponent extends Component
 
             $cashier_id = DB::table('cashiers')
                 ->where('place_id', session()->get('place_id'))
+                ->where('user_id', auth()->user()->id)
                 ->where('status', 1)
                 ->first();
 
@@ -157,12 +152,12 @@ class NewPackageComponent extends Component
 
     public function calculateValue()
     {
-
-
         $amount = DB::table('routes')->select('id', 'price1', 'price2', 'price3', 'tax')->where([
             ['place_id', session()->get('place_id')],
             ['destiny_id', $this->destiny]
         ])->where('status', 1)->get()->first();
+
+        ds($amount);
 
         $area = $this->length * $this->weight * $this->width;
 

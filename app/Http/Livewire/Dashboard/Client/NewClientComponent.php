@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class NewClientComponent extends Component
 {
+    public $type;
     public $name;
     public $rg;
     public $cpfcnpj;
@@ -24,6 +25,7 @@ class NewClientComponent extends Component
     public function store()
     {
         $this->validate([
+            'type' => 'required',
             'name' => 'required|min:3',
             'rg' => 'min:7',
             'cpfcnpj' => 'required|numeric|unique:clients,cpfcnpj',
@@ -36,6 +38,7 @@ class NewClientComponent extends Component
             'city' => 'required',
             'state' => 'required',
         ],[
+            'type.required' => 'O campo tipo é obrigatório',
             'name.required' => 'O campo nome é obrigatório',
             'name.min' => 'O campo nome deve ter no mínimo 3 caracteres',
             'rg.min' => 'O campo RG deve ter no mínimo 7 caracteres',
@@ -59,6 +62,7 @@ class NewClientComponent extends Component
 
         try {
             $client = new Client();
+            $client->type = $this->type;
             $client->name = $this->name;
             $client->rg = $this->rg;
             $client->cpfcnpj = $this->cpfcnpj;

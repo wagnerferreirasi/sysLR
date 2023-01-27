@@ -90,17 +90,17 @@
                         @csrf
                         <div class="form-group">
                             <label for="value">Valor</label>
-                            <input type="text" class="form-control" name="value"  wire:model.lazy="state.value" placeholder="Valor" required>
+                            <input type="text" class="form-control" name="value"  wire:model.defer="state.value" placeholder="Valor" required>
                             @error('value')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
                             <label for="description">Descrição</label>
-                            <input type="text" class="form-control" name="description" wire:model.lazy="state.description" placeholder="Descrição" required>
+                            <input type="text" class="form-control" name="description" wire:model.defer="state.description" placeholder="Descrição" required>
                             @error('description')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
                             <label for="payment_method">Forma de Pagamento</label>
-                            <select name="payment_method" wire:model.lazy.lazy="state.paymentMethod" class="form-select" required>
+                            <select name="payment_method" wire:model.defer="state.paymentMethod" class="form-select" required>
                                 <option value="">Selecione</option>
                                 @foreach($paymentMethods as $paymentMethod)
                                     <option value="{{ $paymentMethod->id }}">{{ $paymentMethod->name }}</option>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="form-group">
                             <label for="type">Tipo</label>
-                            <select name="type" wire:model.lazy="state.type" class="form-select" required>
+                            <select name="type" wire:model.defer="state.type" class="form-select" required>
                                 <option value="">Selecione</option>
                                 <option value="in">Entrada</option>
                             </select>
