@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Livewire\Auth\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\PackageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,11 @@ use App\Http\Controllers\ClientController;
 |
 */
 
-// Route::get('/test', [ClientController::class, 'index']);
-// Route::post('/clientcreate', [ClientController::class, 'store']);
-// Route::get('/client/{id}', [ClientController::class, 'show']);
+Route::get('/clients', [ClientController::class, 'index']);
+Route::post('/client/create', [ClientController::class, 'store']);
+Route::get('/client/{id}', [ClientController::class, 'show']);
+
+Route::get('/packages', [PackageController::class, 'getAll']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -14,6 +14,7 @@ class LoginComponent extends Component
     public $place;
     public $login;
     public $password;
+    public $remember = false;
 
     protected $rules = [
         'login' => 'required',
@@ -33,8 +34,8 @@ class LoginComponent extends Component
 
     public function loginSuccess(): void
     {
-        $this->redirect(route('dashboard'));
         $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Login realizado com sucesso! Redirecionando...']);
+        $this->redirect(route('dashboard'));
     }
 
     public function loginError(): void
@@ -45,35 +46,36 @@ class LoginComponent extends Component
 
     public function mount()
     {
-        $this->places = Place::all();
+        $this->places = cache()->rememberForever('places', function () {
+            return Place::all();
+        });
     }
 
     public function validateLogin()
     {
+        $this->validate($this->rules, $this->messages);
         $this->dispatchBrowserEvent('loading_login');
 
-        $this->validate($this->rules, $this->messages);
-
         $user = User::where('login', $this->login)
-            ->where('active', 1)
-            ->first();
+                ->where('active', 1)
+                ->first();
 
         if ($user) {
-            if(Auth::attempt(['login' => $this->login, 'password' => $this->password])) {
+            if(Auth::attempt(['login' => $this->login, 'password' => $this->password], $this->remember)) {
                 $place = Place::find($this->place);
                 session([
                     'place_id' => $place->id,
                     'place_name' => $place->name,
                 ]);
-                $this->emit('loginSuccess');
                 Log::info('Login realizado com sucesso: ' . $this->login . ' - placeId: ' . $this->place);
+                return $this->emit('loginSuccess');
             } else {
-                $this->emit('loginError');
                 Log::error('Login inválido: ' . $this->login . ' - placeId: ' . $this->place);
+                return $this->emit('loginError');
             }
         } else {
-            $this->emit('loginError');
             Log::error('Login inválido: ' . $this->login . ' - placeId: ' . $this->place);
+            return $this->emit('loginError');
         }
     }
 

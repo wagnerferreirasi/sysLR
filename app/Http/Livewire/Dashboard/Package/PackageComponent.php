@@ -4,8 +4,8 @@ namespace App\Http\Livewire\Dashboard\Package;
 
 use App\Models\Sender;
 use App\Models\Package;
-use Illuminate\Contracts\Session\Session;
 use Livewire\Component;
+use LaravelQRCode\Facades\QRCode;
 use Illuminate\Support\Facades\DB;
 
 class PackageComponent extends Component
@@ -90,14 +90,17 @@ class PackageComponent extends Component
             ->join('destinies', 'packages.destiny_id', '=', 'destinies.id')
             ->join('package_items', 'packages.id', '=', 'package_items.package_id')
             ->join('payment_methods', 'package_items.payment_method_id', '=', 'payment_methods.id')
-            ->select('packages.*', 'senders.name as sender_name', 'senders.phone as sender_phone', 'senders.email as sender_email', 'senders.document as sender_document', 'clients.name as client_name', 'clients.phone as client_phone', 'clients.email as client_email', 'clients.cpfCnpj as client_cpf', 'clients.zip_code as client_cep', 'clients.address as client_address', 'clients.number as client_number', 'clients.complement as client_complement', 'clients.district as client_district', 'clients.city as client_city', 'clients.state as client_state', 'destinies.name as destiny_name', 'payment_methods.name as payment_method_name', 'package_items.value', 'package_items.weight', 'package_items.width', 'package_items.height', 'package_items.length', 'package_items.observations', 'package_items.pay_on_delivery')
+            ->select('packages.*', 'senders.name as sender_name', 'senders.phone as sender_phone', 'senders.email as sender_email', 'senders.document as sender_document', 'clients.name as client_name', 'clients.phone as client_phone', 'clients.email as client_email', 'clients.cpfCnpj as client_cpf', 'clients.zip_code as client_cep', 'clients.address as client_address', 'clients.number as client_number', 'clients.complement as client_complement', 'clients.district as client_district', 'clients.city as client_city', 'clients.state as client_state', 'destinies.name as destiny_name', 'package_items.payment_method_id', 'payment_methods.name as payment_method_name', 'package_items.value', 'package_items.weight', 'package_items.width', 'package_items.height', 'package_items.length', 'package_items.observations', 'package_items.pay_on_delivery')
             ->where('packages.id', $id)
             ->first();
             session(['package' => $package]);
 
-            //dd(session('package'));
-
         return redirect('/print');
+    }
+
+    public function getQrCode($code)
+    {
+        return QRCode::text($code)->png();
     }
 
     public function modalDelete($id)

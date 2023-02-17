@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ env('APP_NAME') }} | @yield('title')</title>
+    <title>LR TUR Translog | @yield('title')</title>
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
 
@@ -179,12 +179,12 @@
                                         <p>Rotas</p>
                                     </a>
                                 </li>
-                                <!-- <li class="nav-item">
-                                    <a href="{{-- route('dashboard.reports') --}}" class="nav-link {{ request()->is('dashboard/reports') ? 'active' : '' }} text-dark">
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.reports') }}" class="nav-link {{ request()->is('dashboard/reports') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-poll nav-icon"></i>
                                         <p>Relatórios</p>
                                     </a>
-                                </li> -->
+                                </li>
                                 @endif
                                 <!-- <li class="nav-item">
                                     <a href="{{-- route('dashboard.alerts') --}}" class="nav-link {{ request()->is('dashboard/alerts') ? 'active' : '' }} text-dark">
@@ -300,6 +300,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- OPTIONAL SCRIPTS -->
     @livewireScripts
+
     <script src="{{ asset('vendor/pharaonic/pharaonic.select2.min.js') }}"></script>
     @yield('scripts')
 

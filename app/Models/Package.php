@@ -12,6 +12,7 @@ class Package extends Model
     protected $fillable = [
         'code',
         'user_id',
+        'sender_id',
         'place_id',
         'destiny_id',
         'client_id',

@@ -288,6 +288,7 @@
             <!-- /.content-header -->
 
             <!-- Main content -->
+            <?php $package = session()->get('package'); ?>
             <div class="content">
                 <div class="receipt" id="printarea" onload="print()">
                     <div class="py-12">
@@ -300,7 +301,7 @@
                                     <div class="col-sm-12 px-5">
                                         <span class="badge badge-pill badge-warning">
                                             <h6 class="mb-0">
-                                                <strong>LRCODE:</strong> {{ session()->get('package')->code }}
+                                                <strong>LRCODE:</strong> {{ $package->code ?? '' }}
                                             </h6>
                                         </span>
                                     </div>
@@ -328,8 +329,13 @@
                                             </div>
                                             <div class="row d-flex justify-content-center">
                                                 <div class="col">
-                                                    <p class="text-left my-0">MOVIMENTO: <br />
-                                                    <h3></h3>
+                                                    <p class="text-left my-0">MOVIMENTO: {{ date('d/m/Y H:i:s') }}</p>
+                                                        <br />
+                                                    <h3>
+                                                        @if ($package->payment_method_id == 7)
+                                                            <span class="badge badge-pill badge-success">PAGAMENTO NO DESTINO</span>
+                                                        @endif
+                                                    </h3>
                                                     </p>
                                                     <p class="my-0">OPERADOR(A): </p>
                                                     <hr>
@@ -347,19 +353,20 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <th>Pac </th>
-                                                                <td>R$ {{session()->get('package')->value}}</td>
+
+                                                                <th>Pac {{$package->length}} x {{$package->width}} x {{$package->height}}</th>
+                                                                <td>R$ {{session()->get('package')->value ?? ''}}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                     <p class="my-0">VALOR DO PACOTE: R$
-                                                        {{session()->get('package')->value}}
+                                                        {{session()->get('package')->value ?? ''}}</p>
                                                     </p>
                                                     <p class="my-0">DESTINO: {{ session()->get('package')->destiny ?? '' }}</p>
-                                                    <p class="my-0">MEDIDAS(CxLxA):</p>
+                                                    <p class="my-0">MEDIDAS(CxLxA): {{$package->length}} x {{$package->width}} x {{$package->height}}</p>
                                                     <p class="my-0 texto-maior">RASTREADOR:</p>
                                                     <p class="my-0 texto-maior">
-                                                        {{ session()->get('package')->code }}
+                                                        {{ $package->code ?? ''}}
                                                     </p>
                                                     <p class="my-0 display-4"></p>
                                                     <p class="lead my-0 font-weight-bold"></p>
@@ -368,11 +375,11 @@
                                             </div>
                                             <div class="row d-flex justify-content-center">
                                                 <div class="d-flex">
-                                                    QRCODE
+                                                    <img src="{{ route('qrcode', ['id'=>$package->code]) }}" width="300" alt="QRCode">
                                                     <hr>
                                                 </div>
                                                 <div class="col">
-                                                    <p class="my-0 display-5">{{ session()->get('package')->code }}</p>
+                                                    <p class="my-0 texto-maior">{{ $package->code ?? '' }}</p>
                                                     <p class="my-0 display-4"></p>
                                                 </div>
                                             </div>

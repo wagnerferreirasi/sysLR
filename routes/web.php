@@ -7,6 +7,7 @@ use App\Http\Livewire\Dashboard\HomeComponent;
 use App\Http\Livewire\Dashboard\Place\PlaceComponent;
 use App\Http\Livewire\Dashboard\Route\RouteComponent;
 use App\Http\Livewire\Dashboard\Client\ClientComponent;
+use App\Http\Livewire\Dashboard\Report\ReportComponent;
 use App\Http\Livewire\Dashboard\Place\NewPlaceComponent;
 use App\Http\Livewire\Dashboard\Route\NewRouteComponent;
 use App\Http\Livewire\Dashboard\Cashier\CashierComponent;
@@ -20,6 +21,8 @@ use App\Http\Livewire\Dashboard\Destiny\NewDestinyComponent;
 use App\Http\Livewire\Dashboard\Package\NewPackageComponent;
 use App\Http\Livewire\Dashboard\Destiny\EditDestinyComponent;
 use App\Http\Livewire\Dashboard\Package\EditPackageComponent;
+use App\Http\Livewire\Dashboard\Report\CachierReportComponent;
+use LaravelQRCode\Facades\QRCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +80,13 @@ Route::group(['prefix' => 'dashboard'], function () {
         Route::get('/add', NewPackageComponent::class)->middleware('auth')->name('dashboard.packages.add');
         Route::get('/edit/{id}', EditPackageComponent::class)->middleware('auth')->name('dashboard.packages.edit');
         Route::get('/print/{id}', PackageComponent::class)->middleware('auth')->name('dashboard.packages.print');
+        Route::get('/qrcode/{id}', [PackageComponent::class, 'getQrCode'])->name('qrcode');
+    });
+
+    //Reports routes
+    Route::group(['prefix' => 'reports'], function () {
+        Route::get('/', ReportComponent::class)->middleware('auth')->name('dashboard.reports');
+        Route::get('/cashiers', CachierReportComponent::class)->middleware('auth')->name('dashboard.reports.cashiers');
     });
 
 });
@@ -84,6 +94,7 @@ Route::group(['prefix' => 'dashboard'], function () {
 Route::get('/print', function () {
     return view('print');
 })->name('print');
+
 
 //logout
 Route::get('/logout', function () {

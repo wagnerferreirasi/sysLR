@@ -14,7 +14,8 @@ class RouteObserver
      */
     public function created(Route $route)
     {
-        //
+        if($route)
+            cache()->forget('route');
     }
 
     /**
@@ -25,7 +26,8 @@ class RouteObserver
      */
     public function updated(Route $route)
     {
-        //
+        if($route)
+            cache()->forget('route');
     }
 
     /**
@@ -36,7 +38,8 @@ class RouteObserver
      */
     public function deleted(Route $route)
     {
-        //
+        if($route)
+            cache()->forget('route');
     }
 
     /**

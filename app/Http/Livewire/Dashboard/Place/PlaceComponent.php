@@ -11,7 +11,9 @@ class PlaceComponent extends Component
 
     public function mount()
     {
-        $this->places = Place::all();
+        $this->places = cache()->rememberForever('places', function () {
+            return Place::all();
+        });
     }
 
     public function render()

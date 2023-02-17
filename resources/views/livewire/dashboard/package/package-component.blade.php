@@ -101,6 +101,9 @@ $(document).ready(function() {
             $('.page-item.active .page-link').addClass('bg-dark text-white border-dark');
             $('.dataTables_empty').addClass('lead');
         },
+        order: [
+            [5, 'desc']
+        ],
         responsive: true,
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por página",

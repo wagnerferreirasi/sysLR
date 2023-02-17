@@ -18,17 +18,17 @@ class Cashier extends Model
 
     public function place()
     {
-        return $this->belongsTo(Place::class);
+        return $this->belongsTo(Place::class, 'place_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function cashMovements()
     {
-        return $this->hasMany(CashMovement::class);
+        return $this->hasMany(CashMovement::class, 'cashier_id');
     }
 
     public function amount()

@@ -66,7 +66,11 @@ class CashierComponent extends Component
             ]);
         });
 
-        session()->flash('message', 'Caixa aberto com sucesso!');
+
+        $this->dispatchBrowserEvent('alert', [
+            'type' => 'success',
+            'message' => 'Caixa aberto com sucesso!'
+        ]);
         return redirect()->route('dashboard.cashiers');
     }
 
@@ -75,8 +79,6 @@ class CashierComponent extends Component
         $this->cashier->update([
             'status' => 'close',
         ]);
-
-        session()->flash('message', 'Caixa fechado com sucesso!');
         return redirect()->route('dashboard.cashiers');
     }
 

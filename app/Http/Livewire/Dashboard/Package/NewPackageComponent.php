@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\DB;
 class NewPackageComponent extends Component
 {
     public $lrCode;
-    public $name;
-    public $document;
-    public $phone;
-    public $email;
     public $client;
     public $sender;
     public $destiny;
@@ -24,10 +20,7 @@ class NewPackageComponent extends Component
     public $paymentMethod;
     public $value;
     public $rules = [
-        'name' => 'required',
-        'document' => 'required:number',
-        'phone' => 'required:number',
-        'email' => 'required:email',
+        'sender' => 'required',
         'client' => 'required',
         'destiny' => 'required',
         'weight' => 'required:number',
@@ -35,13 +28,7 @@ class NewPackageComponent extends Component
         'length' => 'required:number',
         'height' => 'required:number',
     ], $message = [
-        'name.required' => 'O nome é obrigatório',
-        'document.required' => 'O documento é obrigatório',
-        'document.number' => 'O documento deve ser um número',
-        'phone.required' => 'O telefone é obrigatório',
-        'phone.number' => 'O telefone deve ser um número',
-        'email.required' => 'O email é obrigatório',
-        'email.email' => 'O email deve ser um email válido',
+        'sender.required' => 'O remetente é obrigatório',
         'client.required' => 'O cliente é obrigatório',
         'destiny.required' => 'O destino é obrigatório',
         'weight.required' => 'O peso é obrigatório',
@@ -62,8 +49,6 @@ class NewPackageComponent extends Component
     public function loading()
     {
         $this->dispatchBrowserEvent('alert', ['type' => 'info',  'message' => 'Carregando valor e formas de pagamento...']);
-
-        // call calculateValue method
         return $this->calculateValue();
     }
 
@@ -104,7 +89,6 @@ class NewPackageComponent extends Component
                 'client_id' => $this->client,
                 'place_id' => session()->get('place_id'),
                 'destiny_id' => $this->destiny,
-                //'status' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

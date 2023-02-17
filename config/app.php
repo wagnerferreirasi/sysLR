@@ -182,7 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
+        LaravelQRCode\Providers\QRCodeServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -213,7 +213,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Chartjs' => Fx3costa\LaravelChartJs\Facades\Chartjs::class,
+        'QRCode' => LaravelQRCode\Facades\QRCode::class,
     ])->toArray(),
 
 ];

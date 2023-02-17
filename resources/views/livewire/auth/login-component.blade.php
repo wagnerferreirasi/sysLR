@@ -32,7 +32,6 @@
                     @endif
                     <hr class="mb-5">
                     <form wire:submit.prevent="validateLogin">
-                        @csrf
                         <div class="mb-3">
                             <label for="login"><i class="bi bi-person-circle"></i> Login</label>
                             <input type="text" name="login" wire:model.defer="login" class="form-control" required>
@@ -68,13 +67,17 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- <div class="mb-3">
-                        <div class="row">
-                            <div class="col-6">
-                                <a href="" class="btn btn-outline-dark">Esqueci a senha?</a>
+                        <div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="remember">Lembrar</label>
+                                    <input type="checkbox" name="remember" id="remember" wire:model.defer="remember">
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" class="btn btn-outline-dark">Esqueci a senha?</a>
+                                </div>
                             </div>
                         </div>
-                    </div> -->
                     </form>
                 </div>
             </div>
@@ -91,7 +94,6 @@ document.getElementById('togglePassword').addEventListener('mouseup', function()
     document.getElementById('password').type = 'password';
 });
 
-// Para que o password não fique exposto apos mover a imagem.
 document.getElementById('togglePassword').addEventListener('mousemove', function() {
     document.getElementById('password').type = 'password';
 });
@@ -109,7 +111,5 @@ document.addEventListener('loading_login', function() {
         }
     });
 });
-
-
 </script>
 @endsection
