@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
-use App\Models\Cashier;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -31,7 +30,7 @@ class DatatableModel extends Model
         return $this->builder->select($sql);
     }
 
-    public function setWhere($column, $operator = null, $value)
+    public function setWhere($column, $value, $operator = null)
     {
         $this->builder->where($column, $operator, $value);
     }
@@ -51,19 +50,18 @@ class DatatableModel extends Model
         $this->builder->groupBy($column);
     }
 
-    public function setOrderBy($column, $direction = 'asc')
+    public function setOrder($column, $direction = 'asc')
     {
         $this->builder->orderBy($column, $direction);
     }
 
-    public function setLimit($value)
+    public function setOffset($length, $start)
     {
-        $this->builder->limit($value);
-    }
-
-    public function setOffset($value)
-    {
-        $this->builder->offset($value);
+        if ($start === 0) {
+            $this->builder->limit($length);
+        } else {
+            $this->builder->limit($length, $start);
+        }
     }
 
     public function setPaginate($value)

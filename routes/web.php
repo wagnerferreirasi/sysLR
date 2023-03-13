@@ -87,6 +87,8 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::group(['prefix' => 'reports'], function () {
         Route::get('/', ReportComponent::class)->middleware('auth')->name('dashboard.reports');
         Route::get('/cashiers', CachierReportComponent::class)->middleware('auth')->name('dashboard.reports.cashiers');
+        Route::post('/cashiers/getData', [CachierReportComponent::class, 'getData'])->middleware('auth')->name('dashboard.reports.cashiers.getData');
+        Route::get('/cashiers/export', [CachierReportComponent::class, 'exportData'])->middleware('auth')->name('dashboard.reports.cashiers.export');
     });
 
 });

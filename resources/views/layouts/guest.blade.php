@@ -14,6 +14,7 @@
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @livewireStyles
 </head>
 
@@ -21,24 +22,9 @@
 
     {{ $slot }}
 
-
-    <div class="container">
-        <footer class="py-3 my-4">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"></a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"></a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQ</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"></a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted"></a></li>
-            </ul>
-            <p class="text-center text-muted">© <?= date('Y') ?> - {{ env('APP_NAME') }}</p>
-        </footer>
-    </div>
-
     <!-- Core JS files -->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('alert', event => {
             Swal.fire({
@@ -51,7 +37,7 @@
             })
         })
     </script>
-    @yield('scripts')
+    @stack('scripts')
     @livewireScripts
 </body>
 

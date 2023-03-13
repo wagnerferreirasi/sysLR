@@ -3,10 +3,8 @@
 namespace App\Http\Livewire\Auth;
 
 use App\Models\Place;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Illuminate\Support\Facades\Log;
 
 class LoginComponent extends Component
 {
@@ -27,60 +25,40 @@ class LoginComponent extends Component
         'place.required' => 'Selecione uma loja',
     ];
 
-    protected $listeners = [
-        'loginSuccess',
-        'loginError'
-    ];
-
-    public function loginSuccess(): void
-    {
-        $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Login realizado com sucesso! Redirecionando...']);
-        $this->redirect(route('dashboard'));
-    }
-
-    public function loginError(): void
-    {
-        session()->flash('error', 'Login ou senha inválidos');
-        $this->dispatchBrowserEvent('alert', ['type' => 'error',  'message' => 'Erro ao realizar login! Verifique os dados informados e tente novamente.']);
-    }
-
-    public function mount()
-    {
-        $this->places = cache()->rememberForever('places', function () {
-            return Place::all();
-        });
-    }
 
     public function validateLogin()
     {
         $this->validate($this->rules, $this->messages);
-        $this->dispatchBrowserEvent('loading_login');
 
-        $user = User::where('login', $this->login)
-                ->where('active', 1)
-                ->first();
+        $credentials = [
+            'login' => $this->login,
+            'password' => $this->password,
+        ];
 
-        if ($user) {
-            if(Auth::attempt(['login' => $this->login, 'password' => $this->password], $this->remember)) {
-                $place = Place::find($this->place);
-                session([
-                    'place_id' => $place->id,
-                    'place_name' => $place->name,
-                ]);
-                Log::info('Login realizado com sucesso: ' . $this->login . ' - placeId: ' . $this->place);
-                return $this->emit('loginSuccess');
-            } else {
-                Log::error('Login inválido: ' . $this->login . ' - placeId: ' . $this->place);
-                return $this->emit('loginError');
-            }
+        if(Auth::attempt($credentials, $this->remember)) {
+            $place = Place::find($this->place);
+            session([
+                'place_id' => $place->id,
+                'place_name' => $place->name,
+            ]);
+
+            $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Login realizado com sucesso! Redirecionando...']);
+            return $this->redirect(route('dashboard'));
+
         } else {
-            Log::error('Login inválido: ' . $this->login . ' - placeId: ' . $this->place);
-            return $this->emit('loginError');
+            session()->flash('error', 'Login ou senha inválidos');
+            $this->dispatchBrowserEvent('alert', ['type' => 'error',  'message' => 'Erro ao realizar login! Verifique os dados informados e tente novamente.']);
+
+            return $this->render();
         }
     }
 
     public function render()
     {
+        $this->places = cache()->rememberForever('places', function () {
+            return Place::all();
+        });
+
         return view('livewire.auth.login-component')->layout('layouts.guest');
     }
 }

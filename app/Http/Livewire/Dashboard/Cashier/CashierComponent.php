@@ -10,6 +10,8 @@ use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+use function Termwind\render;
+
 class CashierComponent extends Component
 {
     public $cashier;
@@ -71,7 +73,7 @@ class CashierComponent extends Component
             'type' => 'success',
             'message' => 'Caixa aberto com sucesso!'
         ]);
-        return redirect()->route('dashboard.cashiers');
+        return $this->render();
     }
 
     public function closeCashier()

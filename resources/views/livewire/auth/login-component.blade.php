@@ -31,7 +31,7 @@
                     </div>
                     @endif
                     <hr class="mb-5">
-                    <form wire:submit.prevent="validateLogin">
+                    <form wire:submit.prevent="validateLogin" role="form">
                         <div class="mb-3">
                             <label for="login"><i class="bi bi-person-circle"></i> Login</label>
                             <input type="text" name="login" wire:model.defer="login" class="form-control" required>
@@ -62,20 +62,9 @@
                         </div>
                         <div class="mb-3">
                             <div class="d-grid gap-2">
-                                <button class="btn btn-lg btn-warning" type="submit" wire:click="$emitTo('loading_login')">
+                                <button type="submit" class="btn btn-lg btn-warning">
                                     <i class="bi bi-door-open-fill"></i> Entrar
                                 </button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="remember">Lembrar</label>
-                                    <input type="checkbox" name="remember" id="remember" wire:model.defer="remember">
-                                </div>
-                                <div class="col-6">
-                                    <a href="#" class="btn btn-outline-dark">Esqueci a senha?</a>
-                                </div>
                             </div>
                         </div>
                     </form>
@@ -84,7 +73,7 @@
         </div>
     </section>
 </div>
-@section('scripts')
+@push('scripts')
 <script>
 document.getElementById('togglePassword').addEventListener('mousedown', function() {
     document.getElementById('password').type = 'text';
@@ -97,19 +86,5 @@ document.getElementById('togglePassword').addEventListener('mouseup', function()
 document.getElementById('togglePassword').addEventListener('mousemove', function() {
     document.getElementById('password').type = 'password';
 });
-
-document.addEventListener('loading_login', function() {
-    Swal.fire({
-        title: 'Aguarde...',
-        text: 'Estamos validando seu login...',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        allowEnterKey: false,
-        showConfirmButton: false,
-        willOpen: () => {
-            Swal.showLoading()
-        }
-    });
-});
 </script>
-@endsection
+@endpush
