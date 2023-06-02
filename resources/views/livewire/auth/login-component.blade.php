@@ -46,8 +46,8 @@
                                 <span class="input-group-text">
                                     <i class="bi bi-eye" id="togglePassword" style="cursor: pointer"></i>
                                 </span>
-                                @error('password')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
+                            @error('password')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="mb-3">

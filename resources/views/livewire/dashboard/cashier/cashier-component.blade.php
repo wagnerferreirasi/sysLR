@@ -102,9 +102,7 @@
                             <label for="payment_method">Forma de Pagamento</label>
                             <select name="payment_method" wire:model.defer="state.paymentMethod" class="form-select" required>
                                 <option value="">Selecione</option>
-                                @foreach($paymentMethods as $paymentMethod)
-                                    <option value="{{ $paymentMethod->id }}">{{ $paymentMethod->name }}</option>
-                                @endforeach
+                                <option value="1">Dinheiro</option>
                             </select>
                             @error('paymentMethod')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>

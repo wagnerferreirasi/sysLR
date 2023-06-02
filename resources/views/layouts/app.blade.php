@@ -186,19 +186,20 @@
                                         <p>Relatórios</p>
                                     </a>
                                 </li>
-                                @endif
-                                <!-- <li class="nav-item">
+
+                                <li class="nav-item">
                                     <a href="{{-- route('dashboard.alerts') --}}" class="nav-link {{ request()->is('dashboard/alerts') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-exclamation-triangle nav-icon"></i>
                                         <p>Avisos</p>
                                     </a>
-                                </li> -->
-                                <!-- <li class="nav-item">
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{-- route('dashboard.plans') --}}" class="nav-link {{ request()->is('dashboard/plans') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-truck-loading nav-icon"></i>
                                         <p>Manifestos</p>
                                     </a>
-                                </li> -->
+                                </li>
+                                @endif
                             </ul>
                         </li>
                         <li class="nav-item">

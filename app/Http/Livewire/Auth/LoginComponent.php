@@ -43,6 +43,7 @@ class LoginComponent extends Component
             ]);
 
             $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Login realizado com sucesso! Redirecionando...']);
+
             return $this->redirect(route('dashboard'));
 
         } else {

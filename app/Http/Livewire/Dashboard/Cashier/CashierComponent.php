@@ -2,15 +2,14 @@
 
 namespace App\Http\Livewire\Dashboard\Cashier;
 
+use PDF;
 use App\Models\Cashier;
 use Livewire\Component;
-use PDF;
 use App\Models\CashMovement;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-
-use function Termwind\render;
 
 class CashierComponent extends Component
 {
@@ -33,7 +32,7 @@ class CashierComponent extends Component
             $this->amount = $this->cashier->amount();
         }
 
-        $this->paymentMethods = PaymentMethod::all();
+        $this->paymentMethods = PaymentMethod::where('name', 'Dinheiro')->get();
     }
 
     public function openCashier()
@@ -73,6 +72,7 @@ class CashierComponent extends Component
             'type' => 'success',
             'message' => 'Caixa aberto com sucesso!'
         ]);
+
         return $this->render();
     }
 
@@ -81,7 +81,7 @@ class CashierComponent extends Component
         $this->cashier->update([
             'status' => 'close',
         ]);
-        return redirect()->route('dashboard.cashiers');
+        return $this->render();
     }
 
     public function exportData()
