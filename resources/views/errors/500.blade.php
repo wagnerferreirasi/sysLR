@@ -1,1 +1,15 @@
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis officia unde laboriosam perspiciatis! Provident architecto quos repellat explicabo rem reiciendis quia, repudiandae similique tenetur laboriosam, consequuntur a saepe. Officia, velit.
+<h1>
+    Erro 500
+</h1>
+
+<h2>
+    Erro interno do servidor
+</h2>
+
+<p>
+    Ocorreu um erro interno no servidor e não foi possível completar sua requisição.
+</p>
+
+<p>
+    Por favor, tente novamente mais tarde.
+</p>

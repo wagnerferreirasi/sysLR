@@ -73,7 +73,7 @@ class CashierComponent extends Component
             'message' => 'Caixa aberto com sucesso!'
         ]);
 
-        return $this->render();
+        return $this->redirect(route('dashboard.cashiers'));
     }
 
     public function closeCashier()
@@ -81,7 +81,13 @@ class CashierComponent extends Component
         $this->cashier->update([
             'status' => 'close',
         ]);
-        return $this->render();
+
+        $this->dispatchBrowserEvent('alert', [
+            'type' => 'success',
+            'message' => 'Caixa fechado com sucesso!'
+        ]);
+
+        return $this->redirect(route('dashboard.cashiers'));
     }
 
     public function exportData()

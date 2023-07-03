@@ -161,7 +161,7 @@
                                         <p>Pacotes</p>
                                     </a>
                                 </li>
-                                @if(Auth::user()->utype == 'admin' || Auth::user()->utype == 'master')
+                                @if(Auth::user()->utype == 'admin' || Auth::user()->utype == 'master' && auth()->user()->hasRole('admin'))
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.places') }}" class="nav-link {{ request()->is('dashboard/places') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-store nav-icon"></i>
@@ -197,6 +197,12 @@
                                     <a href="{{-- route('dashboard.plans') --}}" class="nav-link {{ request()->is('dashboard/plans') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-truck-loading nav-icon"></i>
                                         <p>Manifestos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{-- route('dashboard.password') --}}" class="nav-link {{ request()->is('dashboard/password') ? 'active' : '' }} text-dark">
+                                        <i class="fas fa-lock nav-icon"></i>
+                                        <p>Senhas</p>
                                     </a>
                                 </li>
                                 @endif

@@ -19,7 +19,7 @@
         <div class="container my-5">
             <div class="row">
                 <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4 text-center mb-3">
-                    <img src="{{ asset('Assets/img/logoalpha.png') }}" class="img-fluid" width="150"
+                    <img src="{{ asset('assets/img/logoalpha.png') }}" class="img-fluid" width="150"
                         alt="Logo LRTUR TRANSLOG">
                 </div>
                 <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
