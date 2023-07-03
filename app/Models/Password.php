@@ -39,5 +39,9 @@ class Password extends Model
         return $query->where('status', 'expired');
     }
 
+    public function checkPassword(string $password): bool
+    {
+        return $this->password === $password;
+    }
 
 }

@@ -21,6 +21,7 @@ class CashierComponent extends Component
     public $paymentMethod;
     public $paymentMethods;
     public $amount;
+    public $password;
     public $state = [];
 
     public function mount()
@@ -101,6 +102,11 @@ class CashierComponent extends Component
             "movimentacoes.pdf"
         );
 
+    }
+
+    public function withdrawal()
+    {
+        dd('withdrawal');
     }
 
     public function render()

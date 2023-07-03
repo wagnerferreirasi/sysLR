@@ -25,6 +25,10 @@
                                     <i class="bi bi-cash"></i>
                                     Fechar Caixa
                                 </a>
+                                <button type="button" class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#modalRetirada">
+                                    <i class="bi bi-cash"></i>
+                                    Retirada
+                                </button>
                             @else
                                 <a href="#" class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#modalAbrirCaixa">
                                     <i class="bi bi-cash"></i>
@@ -136,6 +140,48 @@
                         <button type="button" class="btn btn-outline-dark" wire:click="closeCashier">Fechar Caixa</button>
                     </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal senha retirada -->
+    <div class="modal fade" id="modalRetirada" tabindex="-1" role="dialog" aria-labelledby="modalRetirada" aria-hidden="true" data-bs-backdrop="static" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalRetirada">Fazer Retirada</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form wire:prevent.submit="withdrawal">
+                        <p class="lead">Deseja realmente fazer uma retirada?</p>
+                        <div class="form-group">
+                            <label for="password">Senha Administrativa</label>
+                            <input type="password" class="form-control" name="password" wire:model.defer="password" placeholder="Senha" required>
+                            @error('password')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-outline-dark">
+                                Fazer Retirada
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal valor retirada -->
+    <div class="modal fade" id="modalValorRetirada" tabindex="-1" role="dialog" aria-labelledby="modalValorRetirada" aria-hidden="true" data-bs-backdrop="static" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalValorRetirada">Fazer Retirada</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                 </div>
             </div>
         </div>

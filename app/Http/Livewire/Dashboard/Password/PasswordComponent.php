@@ -75,4 +75,13 @@ class PasswordComponent extends Component
         $this->password = $this->generatePassword();
         $this->savePassword();
     }
+
+    public function passwordCheck($password): bool
+    {
+        if ($password === $this->password) {
+            return true;
+        }
+
+        return false;
+    }
 }
