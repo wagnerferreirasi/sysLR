@@ -8,12 +8,11 @@ use Livewire\Component;
 use App\Models\CashMovement;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class CashierComponent extends Component
 {
-    public $cashier;
+    public mixed $cashier;
     public $movements;
     public $value;
     public $description;
@@ -24,7 +23,7 @@ class CashierComponent extends Component
     public $password;
     public $state = [];
 
-    public function mount()
+    public function mount(): void
     {
         $this->cashier = Cashier::where('user_id', auth()->user()->id)->where('place_id', session()->get('place_id'))->orderBy('id', 'desc')->first();
 
