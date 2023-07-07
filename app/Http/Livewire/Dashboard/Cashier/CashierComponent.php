@@ -106,7 +106,9 @@ class CashierComponent extends Component
 
     public function withdrawal()
     {
-        dd('withdrawal');
+        dd($this->password);
+
+
     }
 
     public function render()

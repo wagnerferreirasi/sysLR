@@ -20,7 +20,7 @@ class PasswordComponent extends Component
     public function render(): View
     {
         if (auth()->user()->hasRole('admin')) {
-            $pwd = $this->password;
+            $pwd = json_decode($this->password);
             return view('livewire.dashboard.password.password-component', compact('pwd'));
         }
 
@@ -47,7 +47,7 @@ class PasswordComponent extends Component
         }
 
         if ($password) {
-            $this->password = $password->password;
+            $this->password = $password;
             return;
         }
 

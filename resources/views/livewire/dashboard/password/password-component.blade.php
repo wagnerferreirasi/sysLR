@@ -25,12 +25,16 @@
                                 Sua senha é:
                             </p>
                             <h1>
-                                {{ $pwd ?? 'Access Denied' }}
+                                {{ $pwd->password ?? 'Senha Expirada! Atualize a página ou gere uma nova senha.' }}
                             </h1>
                             <p>
                                 <small>
                                     <i class="fas fa-info-circle text-yellow"></i>&nbsp;
                                     Esta senha é válida por 3 minutos.
+                                    <br>
+                                    @if(isset($pwd->created_at))
+                                        <i class="m-0">Hora de expiração: {{ Carbon\Carbon::parse($pwd->expiration_date)->format('H:i:s') ?? '' }}</i>
+                                    @endif
                                 </small>
                             </p>
                         </div>

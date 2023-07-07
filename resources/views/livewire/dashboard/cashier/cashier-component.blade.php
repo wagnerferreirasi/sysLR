@@ -154,11 +154,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form wire:prevent.submit="withdrawal">
+                    <form wire:submit.prevent="withdrawal" method="post" autocomplete="off">
+                        @csrf
+                        @method('POST')
                         <p class="lead">Deseja realmente fazer uma retirada?</p>
                         <div class="form-group">
                             <label for="password">Senha Administrativa</label>
-                            <input type="password" class="form-control" name="password" wire:model.defer="password" placeholder="Senha" required>
+                            <input type="password" class="form-control" name="password" wire:model.lazy="password" placeholder="Senha" required>
                             @error('password')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
 

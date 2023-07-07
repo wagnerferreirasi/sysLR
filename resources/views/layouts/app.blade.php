@@ -200,7 +200,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{-- route('dashboard.password') --}}" class="nav-link {{ request()->is('dashboard/password') ? 'active' : '' }} text-dark">
+                                    <a href="{{ route('dashboard.password') }}" class="nav-link {{ request()->is('dashboard/password') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-lock nav-icon"></i>
                                         <p>Senhas</p>
                                     </a>
