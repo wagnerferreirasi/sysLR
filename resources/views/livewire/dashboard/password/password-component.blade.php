@@ -21,6 +21,7 @@
                     </div>
                     <div class="card-body">
                         <div class="text-center">
+                            @if(Auth::user()->hasRole('Admin'))
                             <p>
                                 Sua senha é:
                             </p>
@@ -37,6 +38,11 @@
                                     @endif
                                 </small>
                             </p>
+                            @else
+                                <p>
+                                    Você não tem permissão para visualizar esta página.
+                                </p>
+                            @endif
                         </div>
                     </div>
                 </div>
