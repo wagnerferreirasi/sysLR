@@ -10,7 +10,7 @@
                                 <h5 class="title fw-bold mb-0">Senhas Administrativas</h5>
                             </div>
                             <div class="col-6 d-grid d-md-flex justify-content-md-end">
-                                @if(Auth::user()->utype == 'admin')
+                                @if(Auth::user()->hasRole('admin'))
                                     <button wire:click="forcePassword()" class="btn btn-sm btn-outline-dark mb-0">
                                         <i class="fas fa-sync text-warning"></i>&nbsp;
                                         Gerar nova senha
@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-body">
                         <div class="text-center">
-                            @if(Auth::user()->hasRole('Admin'))
+                            @if(Auth::user()->hasRole('admin'))
                             <p>
                                 Sua senha é:
                             </p>
