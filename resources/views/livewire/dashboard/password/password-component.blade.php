@@ -25,7 +25,7 @@
                                 Sua senha é:
                             </p>
                             <h1>
-                                {{ $pwd->password ?? 'Senha Expirada! Atualize a página ou gere uma nova senha.' }}
+                                {{ $pwd->password ?? 'Senha Expirada! Atualize a página.' }}
                             </h1>
                             <p>
                                 <small>
