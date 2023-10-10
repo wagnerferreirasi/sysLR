@@ -7,11 +7,11 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-6 d-grid d-md-block">
-                                <h4 class="title fw-bold mb-0">Listagem de Destinos</h4>
+                                <h4 class="mb-0 title fw-bold">Listagem de Destinos</h4>
                             </div>
                             <div class="col-6 d-grid d-md-flex justify-content-md-end">
                                 @if(Auth::user()->utype == 'admin')
-                                <a href="{{ route('dashboard.destinies.add') }}" class="btn btn-sm btn-outline-dark mb-0">
+                                <a href="{{ route('dashboard.destinies.add') }}" class="mb-0 btn btn-sm btn-outline-dark">
                                     <i class="fas fa-map-marked-alt text-warning"></i>
                                     Novo destino
                                 </a>
@@ -37,15 +37,15 @@
                                         <td>{{ $destiny->city }}</td>
                                         <td class="text-center">{{ $destiny->state }}</td>
                                         <td class="text-center">
-                                            <button type="button" class="btn btn-sm btn-outline-dark m-0" title="Visualizar" wire:click="show({{ $destiny->id }})">
+                                            <button type="button" class="m-0 btn btn-sm btn-outline-dark" title="Visualizar" wire:click="show({{ $destiny->id }})">
                                                 <i class="fas fa-eye"></i>
                                             </button>
 
-                                            <a href="{{ route('dashboard.destinies.edit', ['id' => $destiny->id]) }}" class="btn btn-sm btn-outline-warning m-0" title="Editar">
+                                            <a href="{{ route('dashboard.destinies.edit', ['id' => $destiny->id]) }}" class="m-0 btn btn-sm btn-outline-warning" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
 
-                                            <button type="button" class="btn btn-sm btn-outline-danger m-0" title="Deletar" wire:click="modalDelete({{ $destiny->id }})">
+                                            <button type="button" class="m-0 btn btn-sm btn-outline-danger" title="Deletar" wire:click="modalDelete({{ $destiny->id }})">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
 

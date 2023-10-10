@@ -11,9 +11,11 @@ class DestinyComponent extends Component
         'delete' => 'delete',
     ];
 
+    public $destinies;
+
     public function mount()
     {
-        $this->destinies = Destiny::all();
+        $this->destinies = Destiny::orderBy('state', 'asc')->get();
     }
 
     public function delete($id)
@@ -29,7 +31,7 @@ class DestinyComponent extends Component
                 'message' => 'Destino excluído com sucesso!'
             ]);
 
-            $this->destinies = Destiny::all();
+            $this->destinies = Destiny::orderBy('state', 'asc')->get();
 
 
         } catch (\Exception $e) {
