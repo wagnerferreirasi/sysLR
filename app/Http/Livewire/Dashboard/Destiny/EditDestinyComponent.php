@@ -29,7 +29,6 @@ class EditDestinyComponent extends Component
         $this->validate([
             'name' => 'required|min:3',
             'phone' => 'required|min:10',
-            'address' => 'required',
             'city' => 'required',
             'state' => 'required',
         ],[
@@ -37,7 +36,6 @@ class EditDestinyComponent extends Component
             'name.min' => 'O campo nome deve ter no mínimo 3 caracteres',
             'phone.required' => 'O campo telefone é obrigatório',
             'phone.min' => 'O campo telefone deve ter no mínimo 10 caracteres',
-            'address.required' => 'O campo endereço é obrigatório',
             'city.required' => 'O campo cidade é obrigatório',
             'state.required' => 'O campo estado é obrigatório',
         ]);

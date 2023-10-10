@@ -18,13 +18,11 @@ class NewDestinyComponent extends Component
         $this->validate([
             'name' => 'required',
             'phone' => 'required',
-            'address' => 'required',
             'city' => 'required',
             'state' => 'required',
         ],[
             'name.required' => 'O campo nome é obrigatório',
             'phone.required' => 'O campo telefone é obrigatório',
-            'address.required' => 'O campo endereço é obrigatório',
             'city.required' => 'O campo cidade é obrigatório',
             'state.required' => 'O campo estado é obrigatório',
         ]);
