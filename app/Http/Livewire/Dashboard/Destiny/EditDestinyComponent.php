@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Dashboard\Destiny;
 
 use App\Models\Destiny;
 use Livewire\Component;
+use Illuminate\Validation\Rule;
 
 class EditDestinyComponent extends Component
 {
@@ -27,17 +28,17 @@ class EditDestinyComponent extends Component
 
     public function update(){
         $this->validate([
-            'name' => 'required|min:3',
-            'phone' => 'required|min:10',
+            'name' => 'required',
+            'phone' => 'required',
             'city' => 'required',
-            'state' => 'required',
+            'state' => ['required','max:2', Rule::in("AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO")],
         ],[
             'name.required' => 'O campo nome é obrigatório',
-            'name.min' => 'O campo nome deve ter no mínimo 3 caracteres',
             'phone.required' => 'O campo telefone é obrigatório',
-            'phone.min' => 'O campo telefone deve ter no mínimo 10 caracteres',
             'city.required' => 'O campo cidade é obrigatório',
             'state.required' => 'O campo estado é obrigatório',
+            'state.max' => 'O campo estado deve ter no máximo 2 caracteres',
+            'state.rules' => 'O campo estado deve ser AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO',
         ]);
         try {
             $destiny = Destiny::find($this->destiny_id);
