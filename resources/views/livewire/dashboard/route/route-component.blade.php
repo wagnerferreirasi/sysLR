@@ -7,11 +7,11 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-6 d-grid d-md-block">
-                                <h4 class="title fw-bold mb-0">Listagem de Rotas</h4>
+                                <h4 class="mb-0 title fw-bold">Listagem de Rotas</h4>
                             </div>
                             <div class="col-6 d-grid d-md-flex justify-content-md-end">
                                 @if(Auth::user()->utype == 'admin')
-                                <a href="{{ route('dashboard.routes.add') }}" class="btn btn-sm btn-outline-dark mb-0">
+                                <a href="{{ route('dashboard.routes.add') }}" class="mb-0 btn btn-sm btn-outline-dark">
                                     <i class="fas fa-route text-warning"></i>&nbsp;
                                     Nova rota
                                 </a>
@@ -26,9 +26,9 @@
                                     <tr>
                                         <th>Origem</th>
                                         <th>Destino</th>
-                                        <th>Valor 1</th>
-                                        <th>Valor 2</th>
-                                        <th>Valor 3</th>
+                                        <th>Valor 1 (Até 50cm³)</th>
+                                        <th>Valor 2 (Até 80cm³)</th>
+                                        <th>Valor 3 (Até 120cm³)</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Ações</th>
                                     </tr>
@@ -49,13 +49,13 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            <!-- <a href="" class="btn btn-sm btn-outline-dark m-0" title="Vizualizar">
+                                            <!-- <a href="" class="m-0 btn btn-sm btn-outline-dark" title="Vizualizar">
                                                 <i class="fas fa-eye"></i>
                                             </a> -->
-                                            <a href="{{ route('dashboard.routes.edit', [$route->id])}}" class="btn btn-sm btn-outline-warning m-0" title="Editar">
+                                            <a href="{{ route('dashboard.routes.edit', [$route->id])}}" class="m-0 btn btn-sm btn-outline-warning" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button type="button" class="btn btn-outline-danger btn-sm m-0" title="Deletar" wire:click="delete({{ $route->id }})">
+                                            <button type="button" class="m-0 btn btn-outline-danger btn-sm" title="Deletar" wire:click="delete({{ $route->id }})">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </td>
