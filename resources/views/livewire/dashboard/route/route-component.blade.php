@@ -26,9 +26,9 @@
                                     <tr>
                                         <th>Origem</th>
                                         <th>Destino</th>
-                                        <th>Valor 1 (Até 50cm³)</th>
-                                        <th>Valor 2 (Até 80cm³)</th>
-                                        <th>Valor 3 (Até 120cm³)</th>
+                                        <th class="text-center">Valor 1 (Até 50cm³)</th>
+                                        <th class="text-center">Valor 2 (Até 80cm³)</th>
+                                        <th class="text-center">Valor 3 (Até 120cm³)</th>
                                         <th class="text-center">Status</th>
                                         <th class="text-center">Ações</th>
                                     </tr>
