@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Dashboard\Package;
 
+use PDF;
 use App\Models\Sender;
 use App\Models\Package;
 use Livewire\Component;
@@ -26,7 +27,15 @@ class PackageComponent extends Component
 
     public function exportData()
     {
-        return $this->packages;
+        $packages = Package::orderBy('id', 'DESC')->get();
+
+        $pdfContent = PDF::loadView('export.exportPackages', ['packages' => $packages])->output();
+        return response()->streamDownload(
+            fn () => print($pdfContent),
+            "packages.pdf"
+        );
+
+        $this->dispatchBrowserEvent('alert', ['type' => 'success', 'message' => 'Dados exportados com sucesso!']);
     }
 
     public function delete($id)

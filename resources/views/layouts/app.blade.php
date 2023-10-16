@@ -55,12 +55,12 @@
                     <a href="{{ route('dashboard') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Suporte</a>
+                    <a href="https://wa.me/15991606104" target="_blank" class="nav-link">Suporte</a>
                 </li>
             </ul>
 
             <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="ml-auto navbar-nav">
                 <!-- Navbar Search -->
                 <li class="nav-item">
                     <a class="nav-link" data-widget="navbar-search" href="#" role="button">
@@ -103,18 +103,18 @@
             <!-- Brand Logo -->
             <a href="{{ route('dashboard') }}" class="text-center brand-link">
                 <img src="<?= asset('assets/img/logoalpha_branco.png'); ?>" width="120" alt="Logo"
-                    class="img-fluid mb-3">
+                    class="mb-3 img-fluid">
             </a>
 
             <div class="sidebar">
-                <div class="user-panel d-flex border-0 m-0">
-                    <div class="info m-0">
-                        <p class="fw-bold mb-0">{{ session('place_name') }}:</p>
+                <div class="m-0 border-0 user-panel d-flex">
+                    <div class="m-0 info">
+                        <p class="mb-0 fw-bold">{{ session('place_name') }}:</p>
                     </div>
                 </div>
 
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="pb-3 mt-3 mb-3 user-panel d-flex">
                     <div class="image">
                         <img src="<?= asset('assets/img/adminlte/user2-160x160.png'); ?>" class="img-circle elevation-2"
                             alt="User Image">
@@ -229,7 +229,7 @@
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row mb-2">
+                    <div class="mb-2 row">
                         <div class="col-sm-6">
                             <h1 class="m-0"></h1>
                         </div><!-- /.col -->
