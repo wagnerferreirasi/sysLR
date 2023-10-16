@@ -136,7 +136,7 @@ class NewPackageComponent extends Component
 
     public function calculateValue()
     {
-        $amount = DB::table('routes')->select('id', 'price1', 'price2', 'price3', 'tax')->where([
+        $amount = DB::table('routes')->select('id', 'price1', 'price2', 'price3')->where([
             ['place_id', session()->get('place_id')],
             ['destiny_id', $this->destiny]
         ])->where('status', 1)->get()->first();
