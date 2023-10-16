@@ -151,7 +151,7 @@ class NewPackageComponent extends Component
             $this->value = $amount->price3;
             if ($area > 1728000) {
                 $newMeasures = $area - 1728000;
-                $additional = $newMeasures / 1000 / 100 * $amount->tax;
+                $additional = $newMeasures / 1000 / 100 * 5;
                 is_numeric($additional);
                 $this->value = $additional + $this->value;
             }
