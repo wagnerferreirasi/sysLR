@@ -42,7 +42,7 @@ class NewDestinyComponent extends Component
             $this->reset();
             $this->dispatchBrowserEvent('alert', ['type' => 'success',  'message' => 'Destino cadastrado com sucesso!']);
         } catch (\Exception $e) {
-            $this->dispatchBrowserEvent('alert', ['type' => 'error',  'message' => 'Erro ao cadastrar destino!']);
+            $this->dispatchBrowserEvent('alert', ['type' => 'error',  'message' => 'Erro ao cadastrar destino!' . $e->getMessage()]);
         }
     }
 

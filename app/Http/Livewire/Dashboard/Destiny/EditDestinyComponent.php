@@ -58,7 +58,7 @@ class EditDestinyComponent extends Component
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('alert', [
                 'type' => 'error',
-                'message' => 'Erro ao atualizar Destino!'
+                'message' => 'Erro ao atualizar Destino!' . $e->getMessage()
             ]);
             return redirect()->route('dashboard.destinies');
         }

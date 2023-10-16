@@ -38,6 +38,7 @@
     @yield('scriptsHeader')
     @yield('styles')
     @livewireStyles
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -309,7 +310,7 @@
     <!-- OPTIONAL SCRIPTS -->
     @livewireScripts
 
-    <script src="{{ asset('vendor/pharaonic/pharaonic.select2.min.js') }}"></script>
+    <x:pharaonic-select2::scripts />
     @yield('scripts')
 
     <script>

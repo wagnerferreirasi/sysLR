@@ -141,8 +141,6 @@ class NewPackageComponent extends Component
             ['destiny_id', $this->destiny]
         ])->where('status', 1)->get()->first();
 
-        ds($amount);
-
         $area = $this->length * $this->weight * $this->width;
 
         if ($area <= 125000) {
