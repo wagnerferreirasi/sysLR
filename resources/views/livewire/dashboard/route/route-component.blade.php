@@ -38,9 +38,9 @@
                                     <tr>
                                         <td>{{ $route->place_name }}</td>
                                         <td>{{ $route->destiny_name }}</td>
-                                        <td>R$ {{ str_replace('.', ',', $route->price1) }}</td>
-                                        <td>R$ {{ str_replace('.', ',', $route->price2) }}</td>
-                                        <td>R$ {{ str_replace('.', ',', $route->price3) }}</td>
+                                        <td class="text-center">R$ {{ str_replace('.', ',', $route->price1) }}</td>
+                                        <td class="text-center">R$ {{ str_replace('.', ',', $route->price2) }}</td>
+                                        <td class="text-center">R$ {{ str_replace('.', ',', $route->price3) }}</td>
                                         <td class="text-center">
                                             @if($route->status == '1')
                                             <span class="badge bg-success">Ativo</span>
