@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('login')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('utype', ['admin', 'user'])->default('user');
+            $table->enum('utype', ['admin', 'user', 'master'])->default('user');
             $table->rememberToken();
             $table->boolean('is_active')->default(true);
             $table->timestamps();

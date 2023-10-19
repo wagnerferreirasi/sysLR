@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Livewire\Dashboard\Password\PasswordComponent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Auth\LoginComponent;
 use App\Http\Livewire\Dashboard\HomeComponent;
+use App\Http\Livewire\Dashboard\User\UserComponent;
 use App\Http\Livewire\Dashboard\Place\PlaceComponent;
 use App\Http\Livewire\Dashboard\Route\RouteComponent;
 use App\Http\Livewire\Dashboard\Client\ClientComponent;
@@ -18,6 +18,7 @@ use App\Http\Livewire\Dashboard\Place\EditPlaceComponent;
 use App\Http\Livewire\Dashboard\Route\EditRouteComponent;
 use App\Http\Livewire\Dashboard\Client\NewClientComponent;
 use App\Http\Livewire\Dashboard\Client\EditClientComponent;
+use App\Http\Livewire\Dashboard\Password\PasswordComponent;
 use App\Http\Livewire\Dashboard\Destiny\NewDestinyComponent;
 use App\Http\Livewire\Dashboard\Package\NewPackageComponent;
 use App\Http\Livewire\Dashboard\Destiny\EditDestinyComponent;
@@ -83,6 +84,10 @@ Route::group(['prefix' => 'dashboard'], function () {
 
     Route::group(['prefix' => 'password'], function () {
         Route::get('/', PasswordComponent::class)->middleware('auth')->name('dashboard.password');
+    });
+
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', UserComponent::class)->middleware('auth')->name('dashboard.users');
     });
 
 });

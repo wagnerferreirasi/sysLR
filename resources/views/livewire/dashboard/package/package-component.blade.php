@@ -10,12 +10,12 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-6 d-grid d-md-block">
-                                <h4 class="title fw-bold mb-0">Listagem de Pacotes</h4>
+                                <h4 class="mb-0 title fw-bold">Listagem de Pacotes</h4>
                             </div>
                             <div class="col-6 d-grid d-md-flex justify-content-md-end">
                                 @if(Auth::user()->utype == 'admin')
                                 <a href="{{ route('dashboard.packages.add') }}"
-                                    class="btn btn-sm btn-outline-dark mb-0">
+                                    class="mb-0 btn btn-sm btn-outline-dark">
                                     <i class="fas fa-box text-warning"></i>&nbsp;
                                     Novo pacotes
                                 </a>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="row">
                             @if (session()->has('message'))
-                            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                            <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session()->get('message') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
@@ -58,19 +58,19 @@
                                         <td>{{ $package->user->name }}</td>
                                         <td>{{ $package->created_at->format('d/m/Y') }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-dark m-0"
+                                            <button type="button" class="m-0 btn btn-sm btn-outline-dark"
                                                 title="Visualizar" wire:click="show({{ $package->id }})">
                                                 <i class="fas fa-eye"></i>
                                             </button>
                                             <!-- button print -->
-                                            <button type="button" class="btn btn-sm btn-outline-success m-0"
+                                            <button type="button" class="m-0 btn btn-sm btn-outline-success"
                                                 title="Imprimir" wire:click="print({{ $package->id }})">
                                                 <i class="fas fa-print"></i>
                                             </button>
-                                            <a href="" class="btn btn-sm btn-outline-warning m-0" title="Editar">
+                                            <a href="" class="m-0 btn btn-sm btn-outline-warning" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button type="button" class="btn btn-outline-danger btn-sm m-0"
+                                            <button type="button" class="m-0 btn btn-outline-danger btn-sm"
                                                 title="Deletar">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
@@ -122,16 +122,16 @@ $(document).ready(function() {
 
 window.addEventListener('showModal', event => {
     $('#showModal').modal('show');
-    $('#showModalLabel').html(event.detail.package.code);
-    let package = event.detail.package;
-    let payOnDelivery = package.pay_on_delivery == 1 ? 'Sim' : 'Não';
-    let data = dataTimeBr(package.created_at);
+    $('#showModalLabel').html(event.detail.user.code);
+    let package = event.detail.user;
+    let payOnDelivery = user.pay_on_delivery == 1 ? 'Sim' : 'Não';
+    let data = dataTimeBr(user.created_at);
     $('#showModalBody').html(" " +
-        "<p><strong>Destino: </strong>" + package.destiny_name + "</p>" +
-        "<p><strong>Valor: </strong> R$ " + package.value + "</p>" +
-        "<p><strong>Forma de pagamento: </strong>" + package.payment_method_name + "</p>" +
+        "<p><strong>Destino: </strong>" + user.destiny_name + "</p>" +
+        "<p><strong>Valor: </strong> R$ " + user.value + "</p>" +
+        "<p><strong>Forma de pagamento: </strong>" + user.payment_method_name + "</p>" +
         "<p><strong>Pagamento no destino: </strong>" + payOnDelivery + "</p>" +
-        "<p><strong>Criado por: </strong>" + package.client_name + "</p>" +
+        "<p><strong>Criado por: </strong>" + user.client_name + "</p>" +
         "<p><strong>Criado em: </strong>" + data + "</p>");
     $('#showModalButtons').html(" " +
         "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>");

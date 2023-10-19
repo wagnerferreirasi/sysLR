@@ -7,11 +7,11 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-6 d-grid d-md-block">
-                                <h5 class="title fw-bold mb-0">Senhas Administrativas</h5>
+                                <h5 class="mb-0 title fw-bold">Senhas Administrativas</h5>
                             </div>
                             <div class="col-6 d-grid d-md-flex justify-content-md-end">
-                                @if(Auth::user()->hasRole('admin'))
-                                    <button wire:click="forcePassword()" class="btn btn-sm btn-outline-dark mb-0">
+                                @if(Auth::user()->can('master'))
+                                    <button wire:click="forcePassword()" class="mb-0 btn btn-sm btn-outline-dark">
                                         <i class="fas fa-sync text-warning"></i>&nbsp;
                                         Gerar nova senha
                                     </button>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="card-body">
                         <div class="text-center">
-                            @if(Auth::user()->hasRole('admin'))
+                            @if(Auth::user()->can('master'))
                             <p>
                                 Sua senha é:
                             </p>
