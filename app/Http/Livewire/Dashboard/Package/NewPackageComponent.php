@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Dashboard\Package;
 use App\Models\Client;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Js;
 
 class NewPackageComponent extends Component
 {
@@ -67,10 +68,11 @@ class NewPackageComponent extends Component
 
         $destinies = cache()->rememberForever('destinies', function () {
             return DB::table('routes')
-                ->join('destinies', 'routes.destiny_id', '=', 'destinies.id')
                 ->select('destinies.*')
+                ->join('destinies', 'routes.destiny_id', '=', 'destinies.id')
                 ->where('routes.place_id', session()->get('place_id'))
                 ->where('routes.status', 1)
+                ->orderBy('destinies.state', 'asc')
                 ->get();
         });
         return view('livewire.dashboard.package.new-package-component', compact('lrCode', 'clients', 'destinies', 'senders'));
@@ -133,6 +135,7 @@ class NewPackageComponent extends Component
             return redirect()->route('dashboard.packages');
         }
     }
+
 
     public function calculateValue()
     {
