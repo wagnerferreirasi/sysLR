@@ -10,12 +10,12 @@
             <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h3 class="card-title h3 mt-1 mb-0" wire:ignore>
+                        <h3 class="mt-1 mb-0 card-title h3" wire:ignore>
                             Novo Pacote | <span class="fw-bold">{{ $lrCode }}</span>
                         </h3>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <div class="gap-2 d-grid d-md-flex justify-content-md-end">
                             <a href="{{ route('dashboard.packages') }}"
-                                class="btn p-0  m-0 btn-sm btn-secondary float-right btn-icon-split">
+                                class="float-right p-0 m-0 btn btn-sm btn-secondary btn-icon-split">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-arrow-left text-warning"></i>
                                 </span>
@@ -46,7 +46,7 @@
                                         <select class="form-select" wire:model.defer="destiny" id="selectDestinies" required>
                                             <option value="" selected>Selecione um ponto de entrega</option>
                                             @foreach($destinies as $destiny)
-                                            <option value="{{ $destiny->id }}">{{ $destiny->name }}</option>
+                                            <option value="{{ $destiny->id }}">{{ strtoupper($destiny->city) }}-{{ $destiny->state }}</option>
                                             @endforeach
                                         </select>
                                         @error('destiny')<span class="text-danger">{{ $message }}</span>@enderror
@@ -65,7 +65,7 @@
 
                             <hr>
                             <div class="row">
-                                <h4 class="text-center fw-bold my-5">
+                                <h4 class="my-5 text-center fw-bold">
                                     <i class="fas fa-box"></i>
                                     Dados do Pacote
                                 </h4>
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row d-grid px-2">
+                            <div class="px-2 row d-grid">
                                 <button type="button" class="btn btn-lg btn-outline-warning" wire:click="loading()">
                                     <i class="fas fa-money-bill"></i>
                                     Ir para Pagamento
