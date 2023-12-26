@@ -7,11 +7,11 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-6 d-grid d-md-block">
-                                <h4 class="title fw-bold mb-0">Listagem de Lojas</h4>
+                                <h4 class="mb-0 title fw-bold">Listagem de Lojas</h4>
                             </div>
                             <div class="col-6 d-grid d-md-flex justify-content-md-end">
                                 @if(Auth::user()->utype == 'admin')
-                                <a href="{{ route('dashboard.places.add') }}" class="btn btn-sm btn-outline-dark mb-0">
+                                <a href="{{ route('dashboard.places.add') }}" class="mb-0 btn btn-sm btn-outline-dark">
                                     <i class="fas fa-store text-warning"></i>&nbsp;
                                     Nova Loja
                                 </a>
@@ -41,15 +41,21 @@
                                         <td>{{ $place->city }}</td>
                                         <td>{{ $place->state }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-outline-dark m-0" data-bs-toggle="modal" data-bs-target="#showPlaceModal{{$place->id}}">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <a href="{{ route('dashboard.places.edit', ['id' => $place->id])}}" class="btn btn-sm btn-outline-warning m-0" title="Editar">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <button type="button" class="btn btn-outline-danger btn-sm m-0" title="Deletar">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
+                                            @if (Auth::user()->can('place_full_access') || Auth::user()->can('place_view'))
+                                                <button type="button" class="m-0 btn btn-sm btn-outline-dark" data-bs-toggle="modal" data-bs-target="#showPlaceModal{{$place->id}}">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            @endif
+                                            @if (Auth::user()->can('place_full_access') || Auth::user()->can('place_edit'))
+                                                <a href="{{ route('dashboard.places.edit', ['id' => $place->id])}}" class="m-0 btn btn-sm btn-outline-warning" title="Editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            @endif
+                                            @if (Auth::user()->can('place_full_access') || Auth::user()->can('place_delete'))
+                                                <button type="button" class="m-0 btn btn-outline-danger btn-sm" title="Deletar">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            @endif
                                         </td>
                                     </tr>
                                     <!-- modal show place -->
