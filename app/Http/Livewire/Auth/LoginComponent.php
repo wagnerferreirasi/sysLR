@@ -57,7 +57,9 @@ class LoginComponent extends Component
     public function render()
     {
         $this->places = cache()->rememberForever('places', function () {
-            return Place::all();
+            $this->places = Place::where('active', 1)
+                ->orderBy('name', 'asc')
+                ->get();
         });
 
         return view('livewire.auth.login-component')->layout('layouts.guest');
