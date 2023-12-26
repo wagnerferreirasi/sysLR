@@ -18,14 +18,14 @@
     <section class="login">
         <div class="container my-5">
             <div class="row">
-                <div class="mb-3 text-center col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4 text-center mb-3">
                     <img src="{{ asset('assets/img/logoalpha.png') }}" class="img-fluid" width="150"
                         alt="Logo LRTUR TRANSLOG">
                 </div>
                 <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
                     <p class="text-center">Para acessar o sistema realize login a baixo.</p>
                     @if (session('error'))
-                    <div class="text-center alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
                         {{ session()->get('error') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
@@ -39,8 +39,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="password" class="m-0 form-label"><i class="bi bi-key-fill"></i> Senha</label>
-                            <div class="mb-3 input-group">
+                            <label for="password" class="form-label m-0"><i class="bi bi-key-fill"></i> Senha</label>
+                            <div class="input-group mb-3">
                                 <input type="password" name="password" wire:model.defer="password" id="password"
                                     class="form-control" required>
                                 <span class="input-group-text">
@@ -55,13 +55,13 @@
                             <select class="form-select" name="place" id="place" wire:model.defer="place" required>
                                 <option value="" selected>Selecione sua Loja</option>
                                 @foreach ($places as $place)
-                                <option value="{{$place['id']}}">{{$place['name']}}</option>
+                                <option value="{{$place->id}}">{{$place->name}}</option>
                                 @endforeach
                             </select>
                             @error('place')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="mb-3">
-                            <div class="gap-2 d-grid">
+                            <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-lg btn-warning">
                                     <i class="bi bi-door-open-fill"></i> Entrar
                                 </button>

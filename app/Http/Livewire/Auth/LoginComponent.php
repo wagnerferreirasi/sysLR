@@ -57,7 +57,7 @@ class LoginComponent extends Component
     public function render()
     {
         $this->places = cache()->rememberForever('places', function () {
-            $this->places = Place::where('active', 1)
+            return Place::where('active', 1)
                 ->orderBy('name', 'asc')
                 ->get();
         });
