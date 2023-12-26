@@ -32,7 +32,7 @@ class NewRouteComponent extends Component
     public function mount()
     {
         $this->destinies = Destiny::orderBy('name', 'asc')->get();
-        $this->places = Place::all();
+        $this->places = Place::where('active', 1)->get();
 
         if(Auth::user()->utype == 'user'){
             $this->place_id = Session::get('place_id');
