@@ -44,7 +44,7 @@ class ClientComponent extends Component
                 'message' => 'Cliente excluído com sucesso!'
             ]);
 
-            $this->mount();
+            return $this->render();
 
         } catch (\Exception $e) {
             $this->dispatchBrowserEvent('alert', [
