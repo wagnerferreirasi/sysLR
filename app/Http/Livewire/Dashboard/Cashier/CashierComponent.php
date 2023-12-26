@@ -25,14 +25,10 @@ class CashierComponent extends Component
 
     public function mount(): void
     {
-        $this->cashier = Cashier::where('user_id', auth()->user()->id)->where('place_id', session()->get('place_id'))->orderBy('id', 'desc')->first();
-
-        if ($this->cashier) {
-            $this->movements = CashMovement::where('user_id', auth()->user()->id)->where('cashier_id', $this->cashier->id)->get();
-            $this->amount = $this->cashier->amount();
-        }
-
-        $this->paymentMethods = PaymentMethod::where('name', 'Dinheiro')->get();
+        $this->cashier = Cashier::where('user_id', auth()->user()->id)
+            ->where('place_id', session()->get('place_id'))
+            ->orderBy('id', 'desc')
+            ->first();
     }
 
     public function openCashier()
@@ -95,7 +91,11 @@ class CashierComponent extends Component
         $cashier = $this->cashier;
         $movements = $this->movements;
 
-        $pdfContent = PDF::loadView('livewire.dashboard.cashier.cashier-component', ['movements'=>$movements, 'cashier'=>$cashier])->output();
+        $pdfContent = PDF::loadView('livewire.dashboard.cashier.cashier-component', [
+            'movements'=>$movements,
+            'cashier'=>$cashier
+        ])->output();
+
         return response()->streamDownload(
             fn () => print($pdfContent),
             "movimentacoes.pdf"
@@ -112,6 +112,16 @@ class CashierComponent extends Component
 
     public function render()
     {
+        if ($this->cashier) {
+            $this->movements = CashMovement::where('user_id', auth()->user()->id)
+                ->where('cashier_id', $this->cashier->id)
+                ->get();
+
+            $this->amount = $this->cashier->amount();
+        }
+
+        $this->paymentMethods = PaymentMethod::where('name', 'Dinheiro')->get();
+
         return view('livewire.dashboard.cashier.cashier-component');
     }
 }
