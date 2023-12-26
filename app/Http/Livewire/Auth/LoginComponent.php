@@ -54,12 +54,15 @@ class LoginComponent extends Component
         }
     }
 
-    public function render()
+    public function mounted()
     {
         if(Auth::check()) {
             return redirect(route('dashboard'));
         }
+    }
 
+    public function render()
+    {
         $this->places = cache()->rememberForever('places', function () {
             return Place::where('active', 1)
                 ->orderBy('name', 'asc')
