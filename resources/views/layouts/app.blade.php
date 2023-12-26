@@ -144,50 +144,63 @@
                                         <p>Home</p>
                                     </a>
                                 </li>
+                                @if (Auth::user()->can('cashier_full_access') || Auth::user()->can('cashier_view'))
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.cashiers') }}" class="nav-link {{ request()->is('dashboard/cashiers') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-cash-register nav-icon"></i>
                                         <p>Abrir/Fechar Caixa</p>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->can('client_full_access') || Auth::user()->can('client_view'))
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.clients') }}" class="nav-link {{ request()->is('dashboard/clients') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-user-tie nav-icon"></i>
                                         <p>Clientes</p>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->can('package_full_access') || Auth::user()->can('package_view'))
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.packages') }}" class="nav-link {{ request()->is('dashboard/packages') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-box nav-icon"></i>
                                         <p>Pacotes</p>
                                     </a>
                                 </li>
-                                @if((Auth::user()->utype == 'admin' || Auth::user()->utype == 'master') && auth()->user()->can('master'))
+                                @endif
+                                @if (Auth::user()->can('place_full_access') || Auth::user()->can('place_view'))
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.places') }}" class="nav-link {{ request()->is('dashboard/places') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-store nav-icon"></i>
                                         <p>Lojas</p>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->can('destiny_full_access') || Auth::user()->can('destiny_view'))
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.destinies') }}" class="nav-link {{ request()->is('dashboard/destinies') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-map-marked-alt nav-icon"></i>
                                         <p>Destinos</p>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->can('route_full_access') || Auth::user()->can('route_view'))
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.routes') }}" class="nav-link {{ request()->is('dashboard/routes') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-route nav-icon"></i>
                                         <p>Rotas</p>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->can('report_full_access') || Auth::user()->can('report_view'))
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.reports') }}" class="nav-link {{ request()->is('dashboard/reports') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-poll nav-icon"></i>
                                         <p>Relatórios</p>
                                     </a>
                                 </li>
-
+                                @endif
+                                @if (Auth::user()->can('warning_full_access') || Auth::user()->can('warning_view'))
                                 <li class="nav-item">
                                     <a href="{{-- route('dashboard.alerts') --}}" class="nav-link {{ request()->is('dashboard/alerts') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-exclamation-triangle nav-icon"></i>
@@ -200,12 +213,16 @@
                                         <p>Manifestos</p>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->can('password_full_access') || Auth::user()->can('password_view'))
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.password') }}" class="nav-link {{ request()->is('dashboard/password') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-lock nav-icon"></i>
                                         <p>Senhas</p>
                                     </a>
                                 </li>
+                                @endif
+                                @if (Auth::user()->can('user_full_access') || Auth::user()->can('user_view'))
                                 <li class="nav-item">
                                     <a href="{{ route('dashboard.users') }}" class="nav-link {{ request()->is('dashboard/users') ? 'active' : '' }} text-dark">
                                         <i class="fas fa-users nav-icon"></i>
@@ -213,6 +230,7 @@
                                     </a>
                                 </li>
                                 @endif
+
                             </ul>
                         </li>
                         <li class="nav-item">
