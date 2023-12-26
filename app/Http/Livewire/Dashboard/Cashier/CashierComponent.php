@@ -118,10 +118,12 @@ class CashierComponent extends Component
                 ->get();
 
             $this->amount = $this->cashier->amount();
+
         }
 
+        $amount = $this->amount;
         $this->paymentMethods = PaymentMethod::where('name', 'Dinheiro')->get();
 
-        return view('livewire.dashboard.cashier.cashier-component');
+        return view('livewire.dashboard.cashier.cashier-component', compact('amount'));
     }
 }
