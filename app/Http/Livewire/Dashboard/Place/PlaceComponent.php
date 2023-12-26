@@ -12,7 +12,9 @@ class PlaceComponent extends Component
     public function mount()
     {
         $this->places = cache()->rememberForever('places', function () {
-            return Place::all();
+            return Place::where('active', 1)
+                ->orderBy('name', 'asc')
+                ->get();
         });
     }
 
