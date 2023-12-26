@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="title mb-0">
+                        <h4 class="mb-0 title">
                             Op.: <strong>{{ Auth::user()->name }}</strong>
                         </h4>
                         @if (session()->has('message'))
@@ -19,18 +19,18 @@
                         @if($cashier)
                             @if ($cashier->status == 'open')
                                 <p>Aberto em: {{ date('d/m/Y', strtotime($cashier->created_at)) }}</p>
-                                <p class="font-weight-bold">- Total em Caixa: R${{ $amount }} </p>
+                                <p class="font-weight-bold">- Total em Caixa: R${{ $amount ?? 0 }} </p>
 
-                                <a href="#" class="btn btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#modalFecharCaixa">
+                                <a href="#" class="mb-2 btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalFecharCaixa">
                                     <i class="bi bi-cash"></i>
                                     Fechar Caixa
                                 </a>
-                                <button type="button" class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#modalRetirada">
+                                <button type="button" class="mb-2 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalRetirada">
                                     <i class="bi bi-cash"></i>
                                     Retirada
                                 </button>
                             @else
-                                <a href="#" class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#modalAbrirCaixa">
+                                <a href="#" class="mb-2 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalAbrirCaixa">
                                     <i class="bi bi-cash"></i>
                                     Abrir Caixa
                                 </a>
@@ -39,13 +39,13 @@
                             @endif
                         @else
                             <p class="category">Nenhum caixa aberto para este usuário, necessário abrir um caixa para realizar movimentações.</p>
-                            <a href="#" class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#modalAbrirCaixa">
+                            <a href="#" class="mb-2 btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalAbrirCaixa">
                                 <i class="bi bi-cash"></i>
                                 Abrir Caixa
                             </a>
                             <br>
                         @endif
-                        <p class="lead mb-0 font-weight-bold mt-5">Lista de movimentações</p>
+                        <p class="mt-5 mb-0 lead font-weight-bold">Lista de movimentações</p>
 
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id="dataMovimento" style="width: 100%;">
