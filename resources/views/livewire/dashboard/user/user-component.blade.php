@@ -1,6 +1,6 @@
 @section('title', 'Usuários')
 <div>
-<div class="container-fluid">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -11,7 +11,7 @@
                             </div>
                             <div class="col-6 d-grid d-md-flex justify-content-md-end">
                                 @if(Auth::user()->utype == 'admin' && auth()->user()->can('master'))
-                                <a href="{{ route('dashboard.routes.add') }}" class="mb-0 btn btn-sm btn-outline-dark">
+                                <a href="{{ route('dashboard.users.add') }}" class="mb-0 btn btn-sm btn-outline-dark">
                                     <i class="fas fa-route text-warning"></i>&nbsp;
                                     Novo usuário
                                 </a>
@@ -56,7 +56,7 @@
                                                 <i class="fas fa-eye"></i>
                                             </button>
                                             @if (auth()->user()->can('master'))
-                                                <a href="{{ route('dashboard.routes.edit', [$user->id])}}" class="m-0 btn btn-sm btn-outline-warning" title="Editar">
+                                                <a href="{{ route('dashboard.users.edit', [$user->id])}}" class="m-0 btn btn-sm btn-outline-warning" title="Editar">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <button type="button" class="m-0 btn btn-outline-danger btn-sm" title="Deletar" wire:click="delete({{ $user->id }})">

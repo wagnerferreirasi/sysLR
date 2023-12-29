@@ -7,8 +7,10 @@ use App\Http\Livewire\Dashboard\HomeComponent;
 use App\Http\Livewire\Dashboard\User\UserComponent;
 use App\Http\Livewire\Dashboard\Place\PlaceComponent;
 use App\Http\Livewire\Dashboard\Route\RouteComponent;
+use App\Http\Livewire\Dashboard\User\NewUserComponent;
 use App\Http\Livewire\Dashboard\Client\ClientComponent;
 use App\Http\Livewire\Dashboard\Report\ReportComponent;
+use App\Http\Livewire\Dashboard\User\EditUserComponent;
 use App\Http\Livewire\Dashboard\Place\NewPlaceComponent;
 use App\Http\Livewire\Dashboard\Route\NewRouteComponent;
 use App\Http\Livewire\Dashboard\Cashier\CashierComponent;
@@ -25,8 +27,8 @@ use App\Http\Livewire\Dashboard\Destiny\EditDestinyComponent;
 use App\Http\Livewire\Dashboard\Package\EditPackageComponent;
 use App\Http\Livewire\Dashboard\Report\CachierReportComponent;
 
-
 Route::get('/', LoginComponent::class)->name('login');
+
 
 // group dashboard routes
 Route::group(['prefix' => 'dashboard'], function () {
@@ -88,6 +90,8 @@ Route::group(['prefix' => 'dashboard'], function () {
 
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', UserComponent::class)->middleware('auth')->name('dashboard.users');
+        Route::get('/add', NewUserComponent::class)->middleware('auth')->name('dashboard.users.add');
+        Route::get('/edit/{id}', EditUserComponent::class)->middleware('auth')->name('dashboard.users.edit');
     });
 
 });
