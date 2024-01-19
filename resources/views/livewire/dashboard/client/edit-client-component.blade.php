@@ -19,12 +19,12 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form wire:submit="update">
+                        <form wire:submit.prevent="update">
                             <div class="row">
                                 <div class="col-3">
                                     <div class="form-group mb-3">
                                         <label for="type">Tipo</label>
-                                        <select class="form-select" id="type" wire:model="type">
+                                        <select class="form-select" id="type" wire:model.defer="type">
                                             <option>Selecione</option>
                                             <option value="Client">Cliente</option>
                                             <option value="Company">Fornecedor</option>
@@ -37,7 +37,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="cpfcnpj">CPF/CNPJ</label>
-                                        <input type="text" class="form-control required" id="cpfcnpj" wire:model="cpfcnpj" placeholder="Cpf/Cnpj">
+                                        <input type="text" class="form-control required" id="cpfcnpj" wire:model.defer="cpfcnpj" placeholder="Cpf/Cnpj">
                                         @error('cpfcnpj') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -45,14 +45,14 @@
                                     <div class="form-group">
                                         <label for="name">Nome</label>
                                         <input type="text" class="form-control" id="name"
-                                            wire:model="name" placeholder="Nome">
+                                            wire:model.defer="name" placeholder="Nome">
                                         @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="rg">RG</label>
-                                        <input type="text" class="form-control" id="rg" wire:model="rg"
+                                        <input type="text" class="form-control" id="rg" wire:model.defer="rg"
                                             placeholder="RG">
                                         @error('rg') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
@@ -63,7 +63,7 @@
                                     <div class="form-group">
                                         <label for="email">E-Mail</label>
                                         <input type="email" class="form-control" id="email"
-                                            wire:model="email" placeholder="E-Mail">
+                                            wire:model.defer="email" placeholder="E-Mail">
                                         @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                     <div class="form-group">
                                         <label for="phone">Telefone</label>
                                         <input type="text" class="form-control" id="phone"
-                                            wire:model="phone" placeholder="Telefone">
+                                            wire:model.defer="phone" placeholder="Telefone">
                                         @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                                     <div class="form-group">
                                         <label for="zip_code">Cep</label>
                                         <input type="text" class="form-control" id="zip_code"
-                                            wire:model.blur="zip_code" placeholder="Cep" wire:change="viaCep()">
+                                            wire:model.lazy="zip_code" placeholder="Cep" wire:change="viaCep()">
                                         @error('zip_code') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                     <div class="form-group">
                                         <label for="address">Endereço</label>
                                         <input type="text" class="form-control" id="address"
-                                            wire:model="address" placeholder="Endereço">
+                                            wire:model.defer="address" placeholder="Endereço">
                                         @error('address') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                     <div class="form-group">
                                         <label for="number">Número</label>
                                         <input type="text" class="form-control" id="number"
-                                            wire:model="number" placeholder="Número">
+                                            wire:model.defer="number" placeholder="Número">
                                         @error('number') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                     <div class="form-group">
                                         <label for="complement">Complemento</label>
                                         <input type="text" class="form-control" id="complement"
-                                            wire:model="complement" placeholder="Complemento">
+                                            wire:model.defer="complement" placeholder="Complemento">
                                         @error('complement') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -115,7 +115,7 @@
                                     <div class="form-group">
                                         <label for="district">Bairro</label>
                                         <input type="text" class="form-control" id="district"
-                                            wire:model="district" placeholder="Bairro">
+                                            wire:model.defer="district" placeholder="Bairro">
                                         @error('district') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                     <div class="form-group">
                                         <label for="city">Cidade</label>
                                         <input type="text" class="form-control" id="city"
-                                            wire:model="city" placeholder="Cidade">
+                                            wire:model.defer="city" placeholder="Cidade">
                                         @error('city') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -133,7 +133,7 @@
                                     <div class="form-group">
                                         <label for="state">Estado</label>
                                         <input type="text" class="form-control" id="state"
-                                            wire:model="state" placeholder="Estado">
+                                            wire:model.defer="state" placeholder="Estado">
                                         @error('state') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>

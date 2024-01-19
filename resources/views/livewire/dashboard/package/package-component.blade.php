@@ -13,7 +13,7 @@
                                 <h4 class="mb-0 title fw-bold">Listagem de Pacotes</h4>
                             </div>
                             <div class="col-6 d-grid d-md-flex justify-content-md-end">
-                                @if(Auth::user()->can('package_full_access') || Auth::user()->can('package_create'))
+                                @if(Auth::user()->utype == 'admin')
                                 <a href="{{ route('dashboard.packages.add') }}"
                                     class="mb-0 btn btn-sm btn-outline-dark">
                                     <i class="fas fa-box text-warning"></i>&nbsp;
@@ -58,30 +58,22 @@
                                         <td>{{ $package->user->name }}</td>
                                         <td>{{ $package->created_at->format('d/m/Y') }}</td>
                                         <td>
-
-                                            @if(Auth::user()->can('package_full_access') || Auth::user()->can('package_view'))
                                             <button type="button" class="m-0 btn btn-sm btn-outline-dark"
                                                 title="Visualizar" wire:click="show({{ $package->id }})">
                                                 <i class="fas fa-eye"></i>
                                             </button>
-                                            @endif
-                                            @if(Auth::user()->can('package_full_access') || Auth::user()->can('package_edit'))
+                                            <!-- button print -->
                                             <button type="button" class="m-0 btn btn-sm btn-outline-success"
                                                 title="Imprimir" wire:click="print({{ $package->id }})">
                                                 <i class="fas fa-print"></i>
                                             </button>
-                                            @endif
-                                            @if(Auth::user()->can('package_full_access') || Auth::user()->can('package_edit'))
                                             <a href="" class="m-0 btn btn-sm btn-outline-warning" title="Editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            @endif
-                                            @if(Auth::user()->can('package_full_access') || Auth::user()->can('package_delete'))
                                             <button type="button" class="m-0 btn btn-outline-danger btn-sm"
                                                 title="Deletar">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
-                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -98,6 +90,7 @@
     </div>
     <x-modal-component />
     <x-print-component />
+
 </div>
 @section('scripts')
 <script>

@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Livewire\Dashboard\Cashier;
+namespace App\Http\Livewire\Dashboard\Cashier;
 
 use PDF;
 use App\Models\Cashier;
 use Livewire\Component;
 use App\Models\CashMovement;
-use App\Models\Password;
-use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
-use function PHPUnit\Framework\isNull;
 
 class CashierComponent extends Component
 {
@@ -68,7 +64,7 @@ class CashierComponent extends Component
         });
 
 
-        $this->dispatch('alert', [
+        $this->dispatchBrowserEvent('alert', [
             'type' => 'success',
             'message' => 'Caixa aberto com sucesso!'
         ]);
@@ -82,7 +78,7 @@ class CashierComponent extends Component
             'status' => 'close',
         ]);
 
-        $this->dispatch('alert', [
+        $this->dispatchBrowserEvent('alert', [
             'type' => 'success',
             'message' => 'Caixa fechado com sucesso!'
         ]);
@@ -109,44 +105,8 @@ class CashierComponent extends Component
 
     public function withdrawal()
     {
-        if($this->passwordCheck($this->password)) {
-            //faz a retirada e lança o movimento no caixa
-            $moviment = CashMovement::create([
-                'cashier_id' => $this->cashier->id,
-                'user_id' => auth()->user()->id,
-                'payment_method_id' => 1,
-                'type' => 'OUT',
-                'value' => $this->state['value'],
-                'description' => 'Retirada de dinheiro',
-            ]);
+        dd($this->password);
 
-            $this->dispatch('alert', [
-                'type' => 'success',
-                'message' => 'Retirada efetuada com sucesso!'
-            ]);
-
-            return $this->redirect(route('dashboard.cashiers'));
-
-        }
-
-        $this->dispatch('alert', [
-            'type' => 'error',
-            'message' => 'Senha inválida!'
-        ]);
-    }
-
-    public function passwordCheck($password)
-    {
-        $modelPass = Password::where('password', $password)
-                                ->first();
-
-        //dd($modelPass);
-
-        if (isNull($modelPass)) {
-            return false;
-        }
-
-        return true;
 
     }
 
@@ -162,7 +122,6 @@ class CashierComponent extends Component
         }
 
         $amount = $this->amount;
-
         $this->paymentMethods = PaymentMethod::where('name', 'Dinheiro')->get();
 
         return view('livewire.dashboard.cashier.cashier-component', compact('amount'));

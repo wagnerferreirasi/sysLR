@@ -4,7 +4,7 @@
     x-data="wireui_modal({
         show: @toJs($show),
         @if ($attributes->wire('model')->value())
-            model: @entangle($attributes->wire('model')).live
+            model: @entangle($attributes->wire('model'))
         @endif
     })"
     x-on:keydown.escape.window="handleEscape"
@@ -12,7 +12,7 @@
     x-on:keydown.shift.tab.prevent="handleShiftTab"
     x-on:open-wireui-modal:{{ Str::kebab($name) }}.window="open"
     {{ $attributes
-        ->whereDoesntStartWith('wire:model.live')
+        ->whereDoesntStartWith('wire:model')
         ->whereStartsWith(['x-on:', '@', 'wire:']) }}
     style="display: none"
     x-cloak

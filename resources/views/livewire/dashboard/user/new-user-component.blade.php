@@ -24,12 +24,12 @@
                                 {{ session('message') }}
                             </div>
                         @endif
-                        <form wire:submit="store">
+                        <form wire:submit.prevent="store">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Nome</label>
-                                        <input type="text" class="form-control" wire:model="name">
+                                        <input type="text" class="form-control" wire:model.defer="name">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -38,7 +38,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Login</label>
-                                        <input type="text" class="form-control" wire:model="login">
+                                        <input type="text" class="form-control" wire:model.defer="login">
                                         @error('login')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -47,7 +47,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Email</label>
-                                        <input type="email" class="form-control" wire:model="email">
+                                        <input type="email" class="form-control" wire:model.defer="email">
                                         @error('email')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -58,7 +58,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Tipo de Acesso</label>
-                                        <select class="form-select" wire:model="utype">
+                                        <select class="form-select" wire:model.defer="utype">
                                             <option value="">Selecione</option>
                                             <option value="admin">Administrador</option>
                                             <option value="manager">Gerente</option>
@@ -72,7 +72,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Senha</label>
-                                        <input type="password" class="form-control" wire:model="password">
+                                        <input type="password" class="form-control" wire:model.defer="password">
                                         @error('password')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -81,7 +81,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Confirme a Senha</label>
-                                        <input type="password" class="form-control" wire:model="password_confirmation">
+                                        <input type="password" class="form-control" wire:model.defer="password_confirmation">
                                         @error('password_confirmation')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

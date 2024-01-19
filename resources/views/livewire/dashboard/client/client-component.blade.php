@@ -7,14 +7,14 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-6 d-grid d-md-block">
-                                <h4 class="mb-0 title fw-bold">
+                                <h4 class="title fw-bold mb-0">
                                     Lista de Clientes
                                 </h4>
                             </div>
 
                             <div class="col-6 d-grid d-md-flex justify-content-md-end">
                                 @if(Auth::user()->utype == 'admin')
-                                <a href="{{ route('dashboard.clients.add') }}" class="mb-0 btn btn-sm btn-outline-dark">
+                                <a href="{{ route('dashboard.clients.add') }}" class="btn btn-sm btn-outline-dark mb-0">
                                     <i class="fas fa-user-tie text-warning"></i>&nbsp;
                                     Novo Cliente
                                 </a>
@@ -51,13 +51,13 @@
                                             <td class="cpf_cnpj">{!! $client->cpfcnpj !!}</td>
                                             <td>{{ $client->email }}</td>
                                             <td>
-                                                <a href="" class="m-0 btn btn-sm btn-outline-dark" title="Vizualizar">
+                                                <a href="" class="btn btn-sm btn-outline-dark m-0" title="Vizualizar">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="{{ route('dashboard.clients.edit', $client->id) }}" class="m-0 btn btn-sm btn-outline-warning" title="Editar">
+                                                <a href="{{ route('dashboard.clients.edit', $client->id) }}" class="btn btn-sm btn-outline-warning m-0" title="Editar">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <button type="button" class="m-0 btn btn-outline-danger btn-sm"
+                                                <button type="button" class="btn btn-outline-danger btn-sm m-0"
                                                     title="Deletar" data-bs-toggle="modal"
                                                     data-bs-target="#staticBackdrop{{ $client->id }}"">
                                                     <i class=" fas fa-trash-alt"></i>

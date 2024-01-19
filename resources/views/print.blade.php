@@ -106,7 +106,7 @@
                         <i class="fas fa-search"></i>
                     </a>
                     <div class="navbar-search-block">
-                        <form class="form-inline" wire:submit="">
+                        <form class="form-inline" wire:submit.prevent="">
                             <div class="input-group input-group-sm">
                                 <input class="form-control form-control-navbar" type="search" placeholder="Buscar"
                                     aria-label="Search">

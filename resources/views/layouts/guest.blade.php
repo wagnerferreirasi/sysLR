@@ -14,7 +14,8 @@
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @livewireStyles
 </head>
 
 <body>
@@ -25,20 +26,19 @@
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script>
-        document.addEventListener('livewire:init', () => {
-            Livewire.on('alert', (event) => {
-                Swal.fire({
-                    title: event[0].title,
-                    text: event[0].message,
-                    icon: event[0].type,
-                    showConfirmButton: false,
-                    timer: event[0].timer ?? 4000,
-                    timerProgressBar: true,
-                });
-            });
-        });
+        document.addEventListener('alert', event => {
+            Swal.fire({
+                title: event.detail.title,
+                text: event.detail.message,
+                icon: event.detail.type,
+                showConfirmButton: false,
+                timer: event.detail.timer ?? 4000,
+                timerProgressBar: true,
+            })
+        })
     </script>
     @stack('scripts')
+    @livewireScripts
 </body>
 
 </html>

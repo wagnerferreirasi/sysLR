@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Livewire\Auth\Login;
+use App\Http\Livewire\Auth\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PackageController;

@@ -19,12 +19,12 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form wire:submit="update">
+                        <form wire:submit.prevent="update">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Destino</label>
-                                        <select wire:model="destiny_id" class="form-control">
+                                        <select wire:model.defer="destiny_id" class="form-control">
                                             <option value="">Selecione um destino</option>
                                             @foreach($destinies as $destiny)
                                             <option value="{{ $destiny->id }}">{{ $destiny->name }}</option>
@@ -38,21 +38,21 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Valor 1 (Até 50cm³)</label>
-                                        <input wire:model="price1" type="text" class="form-control">
+                                        <input wire:model.defer="price1" type="text" class="form-control">
                                         @error('price1') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Valor 2 (Até 80cm³)</label>
-                                        <input wire:model="price2" type="text" class="form-control">
+                                        <input wire:model.defer="price2" type="text" class="form-control">
                                         @error('price2') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Valor 3 (Até 120cm³)</label>
-                                        <input wire:model="price3" type="text" class="form-control">
+                                        <input wire:model.defer="price3" type="text" class="form-control">
                                         @error('price3') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Status</label>
-                                        <select wire:model="status" class="form-control">
+                                        <select wire:model.defer="status" class="form-control">
                                             <option value="">Selecione um status</option>
                                             <option value="1">Ativo</option>
                                             <option value="0">Inativo</option>
