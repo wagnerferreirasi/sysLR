@@ -35,8 +35,7 @@
 
     <!-- Bootstrap icons -->
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('build/assets/app.3646dde1.css') }}" rel="stylesheet" type="text/css">
-    <script src="{{ asset('build/assets/app.0b76f796.js') }}"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('scriptsHeader')
     @yield('styles')
 
