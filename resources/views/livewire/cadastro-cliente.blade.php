@@ -15,9 +15,9 @@
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card">
-                    <div class="card-header card-header-primary">
+                    <div class="card-header card-header-primary bg-warning">
                         <h3 class="card-title h3 mt-1 mb-0">
-                            Novo Cliente
+                            Novo Cliente/Fornecedor
                         </h3>
                     </div>
                     <div class="card-body">
