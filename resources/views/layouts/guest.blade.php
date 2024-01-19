@@ -14,7 +14,8 @@
     <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="{{ asset('build/assets/app.3646dde1.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ asset('build/assets/app.0b76f796.js') }}"></script>
 </head>
 
 <body>
