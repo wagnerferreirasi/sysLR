@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard\Client;
+namespace App\Http\Livewire;
 
 use App\Models\Client;
 use Livewire\Component;
 
-class NewClientComponent extends Component
+class CadastroCliente extends Component
 {
     public $type;
     public $name;
@@ -21,13 +21,16 @@ class NewClientComponent extends Component
     public $city;
     public $state;
 
+    public function render()
+    {
+        return view('livewire.cadastro-cliente')->layout('layouts.guest');
+    }
 
     public function store()
     {
         $this->validate([
             'type' => 'required',
             'name' => 'required|min:3',
-            'rg' => 'min:7',
             'cpfcnpj' => 'required|numeric|unique:clients,cpfcnpj',
             'email' => 'required|email|unique:clients,email',
             'phone' => 'required|min:10',
@@ -41,7 +44,6 @@ class NewClientComponent extends Component
             'type.required' => 'O campo tipo é obrigatório',
             'name.required' => 'O campo nome é obrigatório',
             'name.min' => 'O campo nome deve ter no mínimo 3 caracteres',
-            'rg.min' => 'O campo RG deve ter no mínimo 7 caracteres',
             'cpfcnpj.required' => 'O campo CPF/CNPJ é obrigatório',
             'cpfcnpj.numeric' => 'O campo CPF/CNPJ deve conter apenas números',
             'cpfcnpj.unique' => 'O CPF/CNPJ informado já está cadastrado',
@@ -78,12 +80,26 @@ class NewClientComponent extends Component
             $client->save();
 
             if ($client) {
-                $this->dispatchBrowserEvent('alert', ['type' => 'success', 'message' => 'Cliente cadastrado com sucesso!']);
-                return redirect()->route('dashboard.clients');
+                $this->dispatch('alert', ['type' => 'success', 'title' => "Cliente cadastrado com sucesso!", 'message' => "Não é necessário realizar nenhum novo cadastro ou login."]);
+
+                //limpa o formulário
+                $this->type = null;
+                $this->name = null;
+                $this->rg = null;
+                $this->cpfcnpj = null;
+                $this->email = null;
+                $this->phone = null;
+                $this->zip_code = null;
+                $this->address = null;
+                $this->number = null;
+                $this->complement = null;
+                $this->district = null;
+                $this->city = null;
+                $this->state = null;
             }
 
         } catch (\Exception $e) {
-            $this->dispatchBrowserEvent('alert', ['type' => 'error', 'message' => 'Erro ao cadastrar cliente! ' .$e->getMessage()]);
+            $this->dispatch('alert', ['type' => 'error', 'message' => 'Erro ao cadastrar cliente! ' .$e->getMessage()]);
         }
     }
 
@@ -117,10 +133,4 @@ class NewClientComponent extends Component
         $this->city = $data->localidade;
         $this->state = $data->uf;
     }
-
-    public function render()
-    {
-        return view('livewire.dashboard.client.new-client-component');
-    }
-
 }

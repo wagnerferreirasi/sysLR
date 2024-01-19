@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Auth\LoginComponent;
+use App\Http\Livewire\CadastroCliente;
 use App\Http\Livewire\Dashboard\HomeComponent;
 use App\Http\Livewire\Dashboard\User\UserComponent;
 use App\Http\Livewire\Dashboard\Place\PlaceComponent;
@@ -28,6 +29,7 @@ use App\Http\Livewire\Dashboard\Package\EditPackageComponent;
 use App\Http\Livewire\Dashboard\Report\CachierReportComponent;
 
 Route::get('/', LoginComponent::class)->name('login');
+Route::get('/cadastro', CadastroCliente::class)->name('cadastro');
 
 
 // group dashboard routes

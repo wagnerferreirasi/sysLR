@@ -19,8 +19,8 @@
 </head>
 
 <body>
-
     {{ $slot }}
+
 
     <!-- Core JS files -->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
@@ -28,12 +28,12 @@
     <script>
         document.addEventListener('alert', event => {
             Swal.fire({
-                title: event.detail.title,
-                text: event.detail.message,
-                icon: event.detail.type,
-                showConfirmButton: false,
-                timer: event.detail.timer ?? 4000,
-                timerProgressBar: true,
+                title: event.detail[0].title,
+                html: event.detail[0].message,
+                icon: event.detail[0].type,
+                showConfirmButton: true,
+                //timer: event.detail[0].timer ?? 4000,
+                //timerProgressBar: true,
             })
         })
     </script>

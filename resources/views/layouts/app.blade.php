@@ -120,7 +120,7 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        {{ Auth::user()->name; }}
+                        {{ Auth::user()->name }}
                     </div>
                 </div>
 
