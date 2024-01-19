@@ -35,9 +35,9 @@
 
     <!-- Bootstrap icons -->
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet" type="text/css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('scriptsHeader')
     @yield('styles')
-    @livewireStyles
 
 </head>
 
@@ -67,7 +67,7 @@
                         <i class="fas fa-search"></i>
                     </a>
                     <div class="navbar-search-block">
-                        <form class="form-inline" wire:submit.prevent="">
+                        <form class="form-inline" wire:submit="">
                             <div class="input-group input-group-sm">
                                 <input class="form-control form-control-navbar" type="search" placeholder="Buscar"
                                     aria-label="Search">
@@ -321,33 +321,29 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
-    <!-- swal -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- toastr -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- viaCep -->
     <script src="{{ asset('assets/js/viaCep.js') }}"></script>
-    <!-- Swal -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <!-- OPTIONAL SCRIPTS -->
-    @livewireScripts
 
     <x:pharaonic-select2::scripts />
     @yield('scripts')
 
     <script>
-        document.addEventListener('alert', event => {
-            Swal.fire({
-                title: event.detail.title,
-                text: event.detail.message,
-                icon: event.detail.type,
-                showConfirmButton: false,
-                timer: event.detail.timer ?? 4000,
-                timerProgressBar: true,
-            })
-        })
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('alert', (event) => {
+                Swal.fire({
+                    title: event[0].title,
+                    text: event[0].message,
+                    icon: event[0].type,
+                    showConfirmButton: false,
+                    timer: event[0].timer ?? 4000,
+                    timerProgressBar: true,
+                });
+            });
+        });
     </script>
 </body>
 

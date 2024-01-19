@@ -24,13 +24,13 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form wire:submit.prevent="update">
+                        <form wire:submit="update">
                             @csrf
                             <div class="row">
                                 <div class="col-md-12" wire:ignore>
                                     <div class="form-group">
                                     <label class="bmd-label-floating">Remetente/Fornecedor</label>
-                                        <select class="form-select" wire:model.defer="sender" id="selectSenders" required>
+                                        <select class="form-select" wire:model="sender" id="selectSenders" required>
                                             <option value="" selected>Selecione um Remetente/Fornecedor</option>
                                             @foreach($senders as $sender)
                                             <option value="{{ $sender->id }}">{{ $sender->cpfcnpj }} - {{ $sender->name }}</option>
@@ -44,7 +44,7 @@
                             <div class="row">
                                 <div class="col-md-6" wire:ignore>
                                         <label class="bmd-label-floating">Local de destino</label>
-                                        <select class="form-select" wire:model.defer="destiny" id="selectDestinies" required>
+                                        <select class="form-select" wire:model="destiny" id="selectDestinies" required>
                                             <option value="" selected>Selecione um ponto de entrega</option>
                                             @foreach($destinies as $destiny)
                                             <option value="{{ $destiny->id }}">{{ $destiny->name }}</option>
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="col-md-6" wire:ignore>
                                         <label class="bmd-label-floating">Destinatário/Cliente</label>
-                                        <select class="form-select" wire:model.defer="client" id="selectClients" required>
+                                        <select class="form-select" wire:model="client" id="selectClients" required>
                                             <option value="" selected>Selecione um cliente</option>
                                             @foreach($clients as $client)
                                             <option class="fw-bold" value="{{ $client->id }}">{{ $client->cpfcnpj }} - {{ $client->name }}</option>
@@ -73,28 +73,28 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Comprimento</label>
-                                        <input type="text" class="form-control" wire:model.defer="length">
+                                        <input type="text" class="form-control" wire:model="length">
                                         @error('length')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Largura</label>
-                                        <input type="text" class="form-control" wire:model.defer="width">
+                                        <input type="text" class="form-control" wire:model="width">
                                         @error('width')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Altura</label>
-                                        <input type="text" class="form-control" wire:model.defer="height">
+                                        <input type="text" class="form-control" wire:model="height">
                                         @error('height')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Peso</label>
-                                        <input type="text" class="form-control" wire:model.defer="weight">
+                                        <input type="text" class="form-control" wire:model="weight">
                                         @error('weight')<span class="text-danger">{{ $message }}</span>@enderror
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="bmd-label-floating">Observação</label>
-                                        <textarea class="form-control" wire:model.defer="observation"
+                                        <textarea class="form-control" wire:model="observation"
                                             rows="5"></textarea>
                                     </div>
                                 </div>
@@ -131,7 +131,7 @@
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Valor</label>
                                                         <input type="text" class="form-control" name="value"
-                                                            wire:model.defer="value">
+                                                            wire:model="value">
                                                         @error('value')<span
                                                             class="text-danger">{{ $message }}</span>@enderror
                                                     </div>
@@ -141,7 +141,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Forma de pagamento</label>
-                                                        <select class="form-select" wire:model.defer="paymentMethod"
+                                                        <select class="form-select" wire:model="paymentMethod"
                                                             name="paymentMethod" required>
                                                             <option value="" selected>Selecione uma forma de pagamento
                                                             </option>

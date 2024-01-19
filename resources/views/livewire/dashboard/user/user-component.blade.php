@@ -10,7 +10,7 @@
                                 <h4 class="mb-0 title fw-bold">Listagem de Usuários</h4>
                             </div>
                             <div class="col-6 d-grid d-md-flex justify-content-md-end">
-                                @if(Auth::user()->utype == 'admin' && auth()->user()->can('master'))
+                                @if(auth()->user()->can('user_full_access') || auth()->user()->can('user_create'))
                                 <a href="{{ route('dashboard.users.add') }}" class="mb-0 btn btn-sm btn-outline-dark">
                                     <i class="fas fa-route text-warning"></i>&nbsp;
                                     Novo usuário
@@ -51,20 +51,23 @@
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            <button type="button" class="m-0 btn btn-sm btn-outline-dark"
+                                            <!-- <button type="button" class="m-0 btn btn-sm btn-outline-dark"
                                                 title="Visualizar" wire:click="show({{ $user->id }})">
                                                 <i class="fas fa-eye"></i>
-                                            </button>
-                                            @if (auth()->user()->can('master'))
+                                            </button> -->
+                                            @if (auth()->user()->can('user_full_access') || auth()->user()->can('user_edit'))
                                                 <a href="{{ route('dashboard.users.edit', [$user->id])}}" class="m-0 btn btn-sm btn-outline-warning" title="Editar">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
+                                            @endif
+                                            @if (auth()->user()->can('user_full_access') || auth()->user()->can('user_delete'))
                                                 <button type="button" class="m-0 btn btn-outline-danger btn-sm" title="Deletar" wire:click="delete({{ $user->id }})">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             @endif
                                         </td>
                                     </tr>
+
                                     @endforeach
                                 </tbody>
                             </table>
@@ -78,7 +81,7 @@
         </div>
     </div>
 
-    <x-modal-component />
+
 </div>
 @section('scripts')
     <script>
@@ -110,19 +113,6 @@
 
         window.addEventListener('showModal', event => {
             $('#showModal').modal('show');
-            $('#showModalLabel').html(event.detail.package.code);
-            let package = event.detail.package;
-            let payOnDelivery = package.pay_on_delivery == 1 ? 'Sim' : 'Não';
-            let data = dataTimeBr(package.created_at);
-            $('#showModalBody').html(" " +
-                "<p><strong>Destino: </strong>" + package.destiny_name + "</p>" +
-                "<p><strong>Valor: </strong> R$ " + package.value + "</p>" +
-                "<p><strong>Forma de pagamento: </strong>" + package.payment_method_name + "</p>" +
-                "<p><strong>Pagamento no destino: </strong>" + payOnDelivery + "</p>" +
-                "<p><strong>Criado por: </strong>" + package.client_name + "</p>" +
-                "<p><strong>Criado em: </strong>" + data + "</p>");
-            $('#showModalButtons').html(" " +
-                "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Fechar</button>");
         });
 
         function dataTimeBr(data) {

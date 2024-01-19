@@ -25,16 +25,18 @@
                             <p>
                                 Sua senha é:
                             </p>
-                            <h1>
+
+                            <span wire:loading>Gerando...</span>
+                            <h1 class="text-7xl font-bold text-amber-400">
                                 {{ $pwd->password ?? 'Senha Expirada! Atualize a página.' }}
                             </h1>
                             <p>
                                 <small>
-                                    <i class="fas fa-info-circle text-yellow"></i>&nbsp;
+                                    <i class="fas fa-info-circle text-red-500"></i>&nbsp;
                                     Esta senha é válida por 3 minutos.
                                     <br>
                                     @if(isset($pwd->created_at))
-                                        <i class="m-0">Hora de expiração: {{ Carbon\Carbon::parse($pwd->expiration_date)->format('H:i:s') ?? '' }}</i>
+                                        <i class="m-0">Hora de expiração: {{ date('H:i', strtotime($pwd->expiration_date)) }}</i>
                                     @endif
                                 </small>
                             </p>

@@ -90,21 +90,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form wire:submit.prevent="openCashier" autocomplete="off">
+                    <form wire:submit="openCashier" autocomplete="off">
                         @csrf
                         <div class="form-group">
                             <label for="value">Valor</label>
-                            <input type="text" class="form-control" name="value"  wire:model.defer="state.value" placeholder="Valor" required>
+                            <input type="text" class="form-control" name="value"  wire:model="state.value" placeholder="Valor" required>
                             @error('value')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
                             <label for="description">Descrição</label>
-                            <input type="text" class="form-control" name="description" wire:model.defer="state.description" placeholder="Descrição" required>
+                            <input type="text" class="form-control" name="description" wire:model="state.description" placeholder="Descrição" required>
                             @error('description')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
                         <div class="form-group">
                             <label for="payment_method">Forma de Pagamento</label>
-                            <select name="payment_method" wire:model.defer="state.paymentMethod" class="form-select" required>
+                            <select name="payment_method" wire:model="state.paymentMethod" class="form-select" required>
                                 <option value="">Selecione</option>
                                 <option value="1">Dinheiro</option>
                             </select>
@@ -112,7 +112,7 @@
                         </div>
                         <div class="form-group">
                             <label for="type">Tipo</label>
-                            <select name="type" wire:model.defer="state.type" class="form-select" required>
+                            <select name="type" wire:model="state.type" class="form-select" required>
                                 <option value="">Selecione</option>
                                 <option value="in">Entrada</option>
                             </select>
@@ -154,13 +154,19 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form wire:submit.prevent="withdrawal" method="post" autocomplete="off">
+                    <form wire:submit="withdrawal" method="post" autocomplete="off">
                         @csrf
                         @method('POST')
                         <p class="lead">Deseja realmente fazer uma retirada?</p>
                         <div class="form-group">
+                            <label for="value">Valor</label>
+                            <input type="text" class="form-control" name="value"  wire:model="state.value" placeholder="Valor" required>
+                            @error('value')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+
+                        <div class="form-group">
                             <label for="password">Senha Administrativa</label>
-                            <input type="password" class="form-control" name="password" wire:model.lazy="password" placeholder="Senha" required>
+                            <input type="password" class="form-control" name="password" wire:model="password" placeholder="Senha" required>
                             @error('password')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
 

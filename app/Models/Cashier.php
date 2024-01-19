@@ -33,6 +33,6 @@ class Cashier extends Model
 
     public function amount()
     {
-        return $this->cashMovements()->sum('value');
+        return $this->cashMovements()->where('type', 'in')->sum('value') - $this->cashMovements()->where('type', 'out')->sum('value');
     }
 }

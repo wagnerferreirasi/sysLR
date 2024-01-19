@@ -31,17 +31,17 @@
                     </div>
                     @endif
                     <hr class="mb-5">
-                    <form wire:submit.prevent="validateLogin" role="form">
+                    <form wire:submit="validateLogin" role="form">
                         <div class="mb-3">
                             <label for="login"><i class="bi bi-person-circle"></i> Login</label>
-                            <input type="text" name="login" wire:model.defer="login" class="form-control" required>
+                            <input type="text" name="login" wire:model="login" class="form-control" required>
                             @error('login')<span class="text-danger">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label m-0"><i class="bi bi-key-fill"></i> Senha</label>
                             <div class="input-group mb-3">
-                                <input type="password" name="password" wire:model.defer="password" id="password"
+                                <input type="password" name="password" wire:model="password" id="password"
                                     class="form-control" required>
                                 <span class="input-group-text">
                                     <i class="bi bi-eye" id="togglePassword" style="cursor: pointer"></i>
@@ -52,7 +52,7 @@
 
                         <div class="mb-3">
                             <label for="place"><i class="bi bi-shop"></i> Loja</label>
-                            <select class="form-select" name="place" id="place" wire:model.defer="place" required>
+                            <select class="form-select" name="place" id="place" wire:model="place" required>
                                 <option value="" selected>Selecione sua Loja</option>
                                 @foreach ($places as $place)
                                 <option value="{{$place->id}}">{{$place->name}}</option>

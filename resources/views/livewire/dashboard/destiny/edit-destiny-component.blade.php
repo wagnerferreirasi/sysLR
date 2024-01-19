@@ -19,20 +19,20 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form wire:submit.prevent="update">
+                        <form wire:submit="update">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="name">Nome</label>
                                         <input type="text" class="form-control required" id="name"
-                                            wire:model.defer="name" placeholder="Nome do destino">
+                                            wire:model="name" placeholder="Nome do destino">
                                         @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="phone">Telefone</label>
-                                        <input type="text" class="form-control" id="phone" wire:model.lazy="phone"
+                                        <input type="text" class="form-control" id="phone" wire:model.blur="phone"
                                             placeholder="Telefone">
                                         @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
@@ -42,7 +42,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="address">Endereço</label>
-                                        <input type="text" class="form-control" id="address" wire:model.lazy="address"
+                                        <input type="text" class="form-control" id="address" wire:model.blur="address"
                                             placeholder="Endereço">
                                         @error('address') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
@@ -52,7 +52,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="city">Cidade</label>
-                                        <input type="text" class="form-control" id="city" wire:model.lazy="city"
+                                        <input type="text" class="form-control" id="city" wire:model.blur="city"
                                             placeholder="Cidade">
                                         @error('city') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>
@@ -60,7 +60,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="state">Estado</label>
-                                        <input type="text" class="form-control" id="state" wire:model.lazy="state"
+                                        <input type="text" class="form-control" id="state" wire:model.blur="state"
                                             placeholder="Estado">
                                         @error('state') <span class="text-danger">{{ $message }}</span> @enderror
                                     </div>

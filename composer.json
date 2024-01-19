@@ -12,7 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laraveldaily/laravel-permission-ui": "^0.1.4",
-        "livewire/livewire": "^2.10",
+        "livewire/livewire": "3.0",
         "pharaonic/livewire-select2": "^1.1",
         "psr/simple-cache": "1.0",
         "spatie/laravel-permission": "^5.10",
