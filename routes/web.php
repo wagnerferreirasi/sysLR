@@ -91,7 +91,7 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::group(['prefix' => 'users'], function () {
         Route::get('/', UserComponent::class)->middleware('auth')->name('dashboard.users');
         Route::get('/add', NewUserComponent::class)->middleware('auth')->name('dashboard.users.add');
-        Route::get('/edit/{id}', EditUserComponent::class)->middleware('auth')->name('dashboard.users.edit');
+        //Route::get('/edit/{id}', EditUserComponent::class)->middleware('auth')->name('dashboard.users.edit');
     });
 
 });
